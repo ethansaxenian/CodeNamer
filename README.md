@@ -1,0 +1,2 @@
+## CodeNamer
+A Codenames bot
