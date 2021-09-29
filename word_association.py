@@ -1,12 +1,19 @@
 from gensim.models import KeyedVectors
 
 KEYED_VECTORS_PATH = 'data/gensim-data/word2vec-google-news-300/word2vec-google-news-300.gz'
-MODEL_PATH = 'data/saved_models/wordVectors'
 
-model = KeyedVectors.load_word2vec_format(KEYED_VECTORS_PATH, binary=True, limit=500000)
-sims = model.most_similar('tree', topn=5)
-print(sims)
-# model.save(MODEL_PATH)
-model = KeyedVectors.load(MODEL_PATH)
-sims = model.most_similar('tree', topn=5)
-print(sims)
+
+def load_word_vectors() -> KeyedVectors:
+    return KeyedVectors.load_word2vec_format(KEYED_VECTORS_PATH, binary=True, limit=500000)
+
+
+def get_similar_words(model: KeyedVectors, word: str, number: int) -> list[tuple[str, float]]:
+    return model.most_similar(word, topn=number)
+
+
+def save_model(model: KeyedVectors, name: str):
+    model.save(f'data/saved_models/{name}')
+
+
+def load_model(name: str) -> KeyedVectors:
+    return KeyedVectors.load(f'data/saved_models/{name}')
