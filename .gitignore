@@ -6,3 +6,5 @@ venv
 work_log.txt
 /data/gensim-data/*
 /data/saved_models/*
+.DS_Store
+.env.development.local
