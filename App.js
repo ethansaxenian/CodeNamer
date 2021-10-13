@@ -21,7 +21,7 @@ export default function App() {
       throw new Error(response.statusText);
     }
     const fetchedMessage = await response.json();
-    setMessage(fetchedMessage);
+    setMessage(fetchedMessage.join(", "));
   }
 
   return (

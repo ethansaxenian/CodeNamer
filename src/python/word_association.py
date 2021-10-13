@@ -1,4 +1,5 @@
 from gensim.models import KeyedVectors
+import sys
 
 KEYED_VECTORS_PATH = 'data/gensim-data/word2vec-google-news-300/word2vec-google-news-300.gz'
 

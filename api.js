@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const { PythonShell } = require("python-shell");
 
+require('dotenv').config()
+
 const app = express();
 const port = 3001;
 
@@ -9,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", async (req, res) => {
-  res.status(200).json({message: "api"});
+  res.status(200).json({message: process.env.PYTHON_PATH});
 });
 
 app.post("/gensim", async (req, res) => {
@@ -21,7 +23,7 @@ app.post("/gensim", async (req, res) => {
     args: [req.body.arg]
   };
 
-  PythonShell.run("script.py", options, (err, result) => {
+  PythonShell.run("word_association.py", options, (err, result) => {
     if (err) throw err;
     // result is an array consisting of messages collected
     // during execution of script.

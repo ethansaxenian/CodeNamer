@@ -10,10 +10,10 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
     "express": "^4.17.1",
-    "nodemon": "^2.0.13",
     "python-shell": "^3.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -21,7 +21,11 @@
     "react-native-web": "^0.17.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "nodemon": "^2.0.13"
   },
-  "private": true
+  "private": true,
+  "nodemonConfig": {
+    "ext": "js,mjs,json,py"
+  }
 }

@@ -17,9 +17,12 @@ venv
 # macOS
 .DS_Store
 
+# environment variables
+.env
+.env.development.local
+
 # misc
 .idea
 *.png
 /data/gensim-data/*
 /data/saved_models/*
-.env.development.local
