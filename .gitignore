@@ -25,4 +25,3 @@ venv
 .idea
 *.png
 /data/gensim-data/*
-/data/saved_models/*
