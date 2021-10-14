@@ -13,8 +13,7 @@ if __name__ == '__main__':
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     #Threshold image (convert to binary). All pixels with value greater than T (70) are set to 255 (white). Otherwise, set to black (0).
-    (T, threshInv) = cv2.threshold(gray, 70, 255,
-                                   cv2.THRESH_BINARY)
+    (T, threshInv) = cv2.threshold(gray, 70, 255, cv2.THRESH_BINARY)
 
     cv2.imshow("Threshold Binary Inverse", threshInv)
 

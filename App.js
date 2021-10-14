@@ -8,20 +8,13 @@ export default function App() {
   const userInput = "tree";
 
   const getMessage = async () => {
-    const response = await fetch("http://localhost:3001/gensim", {
-      method: "POST",
-      body: JSON.stringify({
-        arg: userInput
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
+    const response = await fetch("http://localhost:5000/time");
     if (!response.ok) {
       throw new Error(response.statusText);
     }
     const fetchedMessage = await response.json();
-    setMessage(fetchedMessage.join(", "));
+    console.log(fetchedMessage)
+    setMessage(fetchedMessage.time);
   }
 
   return (
