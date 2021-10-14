@@ -1,26 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import _ from 'lodash';
 
 export default function App() {
-  const [message, setMessage] = useState('loading...');
+  const [words, setWords] = useState();
+  const [userInput, setUserInput] = useState("");
 
-  const userInput = "tree";
-
-  const getMessage = async () => {
-    const response = await fetch("http://localhost:5000/time");
+  const getWords = async () => {
+    setWords();
+    const response = await fetch(`http://127.0.0.1:5000/words/${userInput}`);
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    const fetchedMessage = await response.json();
-    console.log(fetchedMessage)
-    setMessage(fetchedMessage.time);
+    const fetchedWords = await response.json();
+    setWords(fetchedWords);
   }
 
   return (
     <View style={styles.container}>
-      <Button onPress={() => getMessage()} title="Click me"/>
-      <Text>{message}</Text>
+      <TextInput style={styles.input} onChangeText={setUserInput} value={userInput} placeholder="enter a word"/>
+      <Button onPress={() => getWords()} disabled={!userInput} title="Get Words"/>
+      {words ? (
+        _.take(_.sortBy(_.toPairs(words), ([word, score]) => -score), 10).map(([word, score]) => <Text key={word}>{word}: {_.round(score, 3)}</Text>)
+      ) : (
+        <Text>loading...</Text>
+      )}
       <StatusBar style="auto" />
     </View>
   );
@@ -32,5 +37,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
   },
 });
