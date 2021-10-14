@@ -17,3 +17,7 @@ def save_model(model: KeyedVectors, name: str):
 
 def load_model(name: str) -> KeyedVectors:
     return KeyedVectors.load(f'data/saved_models/{name}')
+
+
+def is_valid_clue(clue: str, matcher: str) -> bool:
+    return ("_" not in clue.lower()) and (matcher.lower() not in clue.lower()) and (clue.lower() not in matcher.lower())
