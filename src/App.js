@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 import _ from 'lodash';
@@ -26,7 +25,6 @@ export default function App() {
       ) : (
         <Text>loading...</Text>
       )}
-      <StatusBar style="auto" />
     </View>
   );
 }
