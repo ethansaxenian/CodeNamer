@@ -23,5 +23,4 @@ venv
 
 # misc
 .idea
-*.png
-/data/gensim-data/*
+data/gensim-data/*
