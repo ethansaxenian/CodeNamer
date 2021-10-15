@@ -1,27 +1,39 @@
 {
   "name": "codenamer",
   "main": "index.js",
+  "private": true,
   "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "start-api": "venv/bin/flask run --no-debugger"
+    "start-api": "venv/bin/flask run --no-debugger",
+    "test": "jest"
   },
   "dependencies": {
     "expo": "~42.0.1",
+    "expo-splash-screen": "^0.11.4",
     "expo-status-bar": "~1.0.4",
+    "expo-updates": "^0.8.5",
     "lodash": "^4.17.21",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react-native": "^0.66.0",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-reanimated": "^2.2.3",
-    "react-native-web": "~0.13.12"
+    "react-native-screens": "^3.8.0",
+    "react-native-unimodules": "^0.14.8",
+    "react-native-web": "^0.17.5"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/core": "~7.9.0",
+    "babel-jest": "^27.2.5",
+    "jest": "^27.2.5",
+    "metro-react-native-babel-preset": "^0.66.2",
+    "react-test-renderer": "^17.0.2"
   },
-  "private": true
+  "jest": {
+    "preset": "react-native"
+  }
 }
