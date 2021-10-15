@@ -26,10 +26,10 @@ npm install
 
 To run the Flask server:
 ```
-flask run
+npm start-api
 ```
 
 To run the Expo development server:
 ```
-expo start
+npm start
 ```
