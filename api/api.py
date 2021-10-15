@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from api.word_association import load_model, get_similar_words, is_valid_clue
+from api.word_association import load_model, is_valid_clue
 
 app = Flask(__name__)
 CORS(app)
