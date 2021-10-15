@@ -1,10 +1,26 @@
-.git
-.idea
+# react-native
+node_modules/
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# python
 __pycache__
 venv
-*.png
-work_log.txt
-/data/gensim-data/*
-/data/saved_models/*
+
+# macOS
 .DS_Store
+
+# environment variables
+.env
 .env.development.local
+
+# misc
+.idea
+data/gensim-data/*
