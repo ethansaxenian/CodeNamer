@@ -7,29 +7,13 @@ A Codenames bot
 
 
 ## Installation and Setup Instructions
-Install tesseract using `homebrew`:
-```
-brew install tesseract
-```
-
-Create and enter a python virtual environment
-```
-python3 -m venv venv
-source venv/bin/activate
-```
 
 Install dependencies:
 ```
-pip install -r requirements.txt
 npm install
 ```
 
-To run the Flask server:
-```
-npm start-api
-```
-
-To run the Expo development server:
+To run the development server:
 ```
 npm start
 ```
