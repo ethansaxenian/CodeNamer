@@ -8,7 +8,7 @@ export default function App() {
 
   const getWords = async () => {
     setWords();
-    const response = await fetch(`http://127.0.0.1:5000/words/${userInput}`);
+    const response = await fetch(`http://127.0.0.1:5000/clues/${userInput}`);
     if (!response.ok) {
       throw new Error(response.statusText);
     }

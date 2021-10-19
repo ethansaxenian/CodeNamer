@@ -58,10 +58,6 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
-# python
-__pycache__
-venv
-
 # macOS
 .DS_Store
 
@@ -71,4 +67,3 @@ venv
 
 # misc
 .idea
-data/gensim-data/*
