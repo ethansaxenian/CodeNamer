@@ -1,4 +1,6 @@
 {
+  "name": "CodeNamerIOS",
+  "displayName": "CodeNamerIOS",
   "expo": {
     "name": "codenamer",
     "slug": "codenamer",
