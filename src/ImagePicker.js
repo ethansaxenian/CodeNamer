@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, View } from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
-export default function Images({setImage}) {
+export default function Images({getImage}) {
 
     const choosePhoto = () => {
         const options = {
@@ -22,7 +22,7 @@ export default function Images({setImage}) {
             console.log('User tapped custom button: ', response.errorMessage);
             } else {
             const source = { uri: response.assets[0].uri, base64: response.assets[0].base64 };
-            setImage(source);
+            getImage(source.base64);
             }
         });  
     };
@@ -43,7 +43,7 @@ export default function Images({setImage}) {
             console.log('User tapped custom button: ', response.errorMessage);
             } else {
             const source = { uri: response.assets[0].uri };
-            setImage(source);
+            getImage(source.base64);
             console.log(source)
             }
         });
