@@ -1,6 +1,6 @@
 {
   "plugins": ["react", "react-native"],
-  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:react-native/all"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "parserOptions": {
     "ecmaVersion": 2021,
     "ecmaFeatures": {
@@ -9,7 +9,8 @@
     "sourceType": "module"
   },
   "env": {
-    "react-native/react-native": true
+    "react-native/react-native": true,
+    "jest": true
   },
   "settings": {
     "react": {
@@ -18,7 +19,7 @@
   },
   "rules": {
     "no-unused-vars": "warn",
-    "react-native/no-color-literals": "warn",
+    "react-native/no-color-literals": "off",
     "react-native/sort-styles": "off",
     "react-native/no-unused-styles": "warn",
     "react/prop-types": "off"
