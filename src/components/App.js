@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Text, Block, Button } from 'galio-framework';
+import { Text, Block } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ImageInputs from './ImageInputs';
 import ClueSelector from './ClueSelector';
 import _ from "lodash";
+import { API_SERVER_URL } from '../lib/constants';
+import DevShortcut from '../temp/DevShortcut';
 
 export default function App() {
   const [colors, setColors] = useState([]);
   const [words, setWords] = useState([]);
 
   const readColorCodeImage = async (imgEncoding) => {
-    const response = await fetch(`http://127.0.0.1:5000/colors`, {
+    const response = await fetch(`${API_SERVER_URL}/colors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: imgEncoding
@@ -26,7 +28,7 @@ export default function App() {
   };
 
   const readGameBoardImage = async (imgEncoding) => {
-    const response = await fetch(`http://127.0.0.1:5000/gameboard`, {
+    const response = await fetch(`${API_SERVER_URL}/gameboard`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: imgEncoding
@@ -43,16 +45,11 @@ export default function App() {
   // the board is represented as a list of objects
   const board = _.zip(words, colors).map(([ word, color ]) => ({ word, color }));
 
-  createMockBoard = () => {
-    setWords(["hello"])
-    setColors(["red"])
-  }
-
   return (
     <View style={styles.container}>
       <Block center>
         <Text h3>CodeNamer</Text>
-        <Button onPress={createMockBoard}>Generate Mock Board</Button>
+        <DevShortcut setWords={setWords} setColors={setColors}/>
       </Block>
       {(board.length == 0) ? (
         <ImageInputs getWords={readGameBoardImage} getColors={readColorCodeImage}/>
