@@ -49,7 +49,7 @@ export default function App() {
     <View style={styles.container}>
       <Block center>
         <Text h3>CodeNamer</Text>
-        <DevShortcut setWords={setWords} setColors={setColors}/>
+        {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
       </Block>
       {(board.length == 0) ? (
         <ImageInputs getWords={readGameBoardImage} getColors={readColorCodeImage}/>
