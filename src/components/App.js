@@ -9,8 +9,8 @@ import { API_SERVER_URL } from '../lib/constants';
 import DevShortcut from '../temp/DevShortcut';
 
 export default function App() {
-  const [colors, setColors] = useState([]);
-  const [words, setWords] = useState([]);
+  const [colors, setColors] = useState(null);
+  const [words, setWords] = useState(null);
 
   const readColorCodeImage = async (imgEncoding) => {
     const response = await fetch(`${API_SERVER_URL}/colors`, {
@@ -51,7 +51,7 @@ export default function App() {
         <Text h3>CodeNamer</Text>
         {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
       </Block>
-      {(board.length == 0) ? (
+      {!(words && colors) ? (
         <ImageInputs getWords={readGameBoardImage} getColors={readColorCodeImage}/>
       ) : (
         <>

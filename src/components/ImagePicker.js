@@ -1,31 +1,24 @@
 import React from 'react';
-import { Button, View } from 'react-native';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { Button, View, Dimensions } from 'react-native';
+import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 
-export default function ImagePicker({ useImage }) {
+const { width } = Dimensions.get('screen');
+
+export default function PickImage({ useImage }) {
   const choosePhoto = () => {
-
-    const options = {
-      title: 'Select Image',
+    ImagePicker.openPicker({
       mediaType: 'photo',
-      includeBase64: true
-    };
-
-    launchImageLibrary(options, (response) => { // Use launchImageLibrary to open image gallery
-      //response = response.assets[0];
-      console.log('Response = ', response.assets[0].uri);
-
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.errorCode) {
-        console.log('ImagePicker Error: ', response.errorCode);
-      } else if (response.errorMessage) {
-        console.log('User tapped custom button: ', response.errorMessage);
-      } else {
-        const source = { uri: response.assets[0].uri, base64: response.assets[0].base64 };
-        useImage(source.base64);
-      }
-    });
+      includeBase64: true,
+      freeStyleCropEnabled: true,
+      height: 720,
+      width: 1280,
+      cropping: true,
+      writeTempFile: false,
+      compressImageQuality: 1, 
+    })
+      .then(image => {
+        useImage(image.data);
+      });
   };
 
   const takePhoto = () => {
