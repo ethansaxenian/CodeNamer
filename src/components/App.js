@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Text, Block } from 'galio-framework';
 import GameBoard from './GameBoard';
@@ -11,6 +11,7 @@ import DevShortcut from '../temp/DevShortcut';
 export default function App() {
   const [colors, setColors] = useState([]);
   const [words, setWords] = useState([]);
+  const [board, setBoard] = useState([]);
 
   const readColorCodeImage = async (imgEncoding) => {
     const response = await fetch(`${API_SERVER_URL}/colors`, {
@@ -42,8 +43,24 @@ export default function App() {
     setWords(fetchedGame);
   };
 
-  // the board is represented as a list of objects
-  const board = _.zip(words, colors).map(([ word, color ]) => ({ word, color }));
+  useEffect(() => {
+    if ((colors.length > 0) && (words.length > 0)) {
+      // the board is represented as a list of objects
+      const newBoard = _.zip(words, colors).map(([ word, color ]) => ({ word, color, active: true }));
+      setBoard(newBoard);
+    }
+  }, [colors, words]);
+
+  const toggleWord = (word) => {
+    const newBoard = board.map((card) => {
+      if (card.word === word) {
+        return {...card, active: !card.active}
+      } else {
+        return card
+      }
+    });
+    setBoard(newBoard);
+  }
 
   return (
     <View style={styles.container}>
@@ -56,7 +73,7 @@ export default function App() {
       ) : (
         <>
           <View flex={2} marginTop={50} >
-            <GameBoard board={board}/>
+            <GameBoard board={board} toggleWord={toggleWord}/>
           </View>
           <View flex={2}>
             <ClueSelector words={words} colors={colors} board={board}/>
