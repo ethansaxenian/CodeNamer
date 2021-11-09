@@ -1,8 +1,11 @@
-import { Block, Button, Text } from "galio-framework";
+import { Block, Button, Text, Accordion } from "galio-framework";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View, Dimensions } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
+import { margin } from "@mui/system";
+
+const { width } = Dimensions.get('screen');
 
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
@@ -53,27 +56,35 @@ export default function ClueSelector({ board }) {
 
   const clues = {red: redClues, blue: blueClues}[clueColor] || [];
 
+  const data = [
+    { title: "4 Card Hints", content: "Lorem ipsum dolor sit amet"},
+    { title: "3 Card Hints", content: "Lorem ipsum dolor sit amet" },
+    { title: "2 Card Hints", content: "Lorem ipsum dolor sit amet" }
+  ];
+
   return (
     <Block center>
+      <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}> 
       <Button color="primary" onPress={() => setClueColor("red")}>Get Red Hint</Button>
       <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
+      </View> 
+      {/* <Block style={{ height: 200 }}>
+      <Accordion dataArray={data} />
+      </Block> */}
       <ActivityIndicator animating={loading} size="large"/>
       {(clues.length > 0 && !loading) && (
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', padding: 15}}>
           <FlatList
             data={clues}
             renderItem={({ item }) => (
+              <View>
               <Text h6 style={[styles.clue, { color: clueColor }]}>
                 {_.upperFirst(item.word)} {item.cards.length}:
               </Text>
-            )}
-          />
-          <FlatList
-            data={clues}
-            renderItem={({ item }) => (
               <Text h6 style={styles.cards}>
-                {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
-              </Text>
+              {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
+            </Text>
+            </View>
             )}
           />
         </View>
@@ -90,5 +101,5 @@ const styles = StyleSheet.create({
   cards: {
     paddingLeft: 15,
     paddingVertical: 15
-  }
+  },
 })

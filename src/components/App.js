@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { Text, Block } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ImageInputs from './ImageInputs';
@@ -11,6 +11,7 @@ import DevShortcut from '../temp/DevShortcut';
 export default function App() {
   const [colors, setColors] = useState(null);
   const [words, setWords] = useState(null);
+  const [spyView, setView] = useState("");
 
   const readColorCodeImage = async (imgEncoding) => {
     const response = await fetch(`${API_SERVER_URL}/colors`, {
@@ -49,14 +50,18 @@ export default function App() {
     <View style={styles.container}>
       <Block center>
         <Text h3>CodeNamer</Text>
+          <TouchableOpacity onPress={()=>{setView(!spyView)}} style={styles.spyButton}>
+          <Image style={styles.spyButton} source={spyView?require("../../assets/icon.png"): require("../../assets/player.png")}/>
+          </TouchableOpacity>
+
         {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
       </Block>
       {!(words && colors) ? (
         <ImageInputs getWords={readGameBoardImage} getColors={readColorCodeImage}/>
       ) : (
         <>
-          <View flex={2} marginTop={50} >
-            <GameBoard board={board}/>
+          <View flex={2}>
+            <GameBoard board={board} view = {spyView}/>
           </View>
           <View flex={2}>
             <ClueSelector words={words} colors={colors} board={board}/>
@@ -71,5 +76,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 100,
+  },
+  spyButton: {
+    backgroundColor: '#859a9b',
+    borderRadius: 20,
+    padding: 10,
+    marginBottom: 20,
+    shadowColor: '#303838',
+    shadowOffset: { width: 0, height: 5 },
+    shadowRadius: 10,
+    shadowOpacity: 0.35,
+    width: 40,
+    height: 40
   },
 });

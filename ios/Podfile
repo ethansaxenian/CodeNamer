@@ -14,6 +14,7 @@ target 'CodeNamerIOS' do
   pod 'ExpoModulesCore',
   :path => "../node_modules/expo-modules-core/ios"
 
+
   target 'CodeNamerIOSTests' do
     inherit! :complete
     # Pods for testing
