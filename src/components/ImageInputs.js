@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Block } from "galio-framework";
 import { Text, View } from "react-native";
-import ImagePicker from "./ImagePicker";
+import PickImage from "./ImagePicker";
 import { API_SERVER_URL } from '../lib/constants';
 import DevShortcut from '../temp/DevShortcut';
+import _ from "lodash";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
@@ -52,11 +53,11 @@ export default function ImageInputs({ setBoard }) {
       {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
       <Block center>
         <Text h5>Upload Game Board:</Text>
-        <ImagePicker useImage={readGameBoardImage}/>
+        <PickImage useImage={readGameBoardImage}/>
       </Block>
       <Block center>
         <Text h5>Upload Color Card:</Text>
-        <ImagePicker useImage={readColorCodeImage}/>
+        <PickImage useImage={readColorCodeImage}/>
       </Block>
     </View>
   )

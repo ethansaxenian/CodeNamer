@@ -4,7 +4,7 @@ import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 
 const { width } = Dimensions.get('screen');
 
-export default function ImagePicker({ useImage }) {
+export default function PickImage({ useImage }) {
   const choosePhoto = () => {
     ImagePicker.openPicker({
       mediaType: 'photo',
