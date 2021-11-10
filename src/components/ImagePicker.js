@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, View, Dimensions } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
+import { Button, View, Dimensions } from 'react-native';
+
 
 const { width } = Dimensions.get('screen');
 
