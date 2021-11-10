@@ -1,45 +1,73 @@
 import { Block, Button, Text } from "galio-framework";
-import React, { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
 
 export default function ClueSelector({ board }) {
-  const [clues, setClues] = useState([]);
   const [clueColor, setClueColor] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [redClues, setRedClues] = useState([]);
+  const [blueClues, setBlueClues] = useState([]);
 
-  const getHint = async (color) => {
-    const boardObject = {
-      red: [],
-      blue: [],
-      tan: [],
-      black: []
+  useEffect(() => {
+    setRedClues([]);
+    setBlueClues([]);
+    setClueColor("");
+  }, [board]);
+
+  useEffect(() => {
+    const getHint = async () => {
+      setLoading(true);
+
+      const boardObject = {
+        red: [],
+        blue: [],
+        tan: [],
+        black: []
+      }
+
+      board.forEach(({ word, color, active }) => {
+        if (active) {
+          boardObject[color].push(word);
+        }
+      });
+
+      const queryString = `?red=${_.join(boardObject.red, "+")}`    +
+                          `&blue=${_.join(boardObject.blue, "+")}`  +
+                          `&tan=${_.join(boardObject.tan, "+")}`    +
+                          `&black=${_.join(boardObject.black, "+")}`;
+
+      const response =  await fetch(`${API_SERVER_URL}/clues/${clueColor}${queryString}`);
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const newClues = await response.json();
+
+      if (clueColor === "red") {
+        setRedClues(newClues);
+      } else if (clueColor === "blue") {
+        setBlueClues(newClues);
+      }
+
+      setLoading(false);
+    };
+
+    if (((clueColor === "blue") && (blueClues.length === 0)) || ((clueColor === "red") && (redClues.length === 0))) {
+      getHint();
     }
 
-    board.forEach(({ word, color }) => {
-      boardObject[color].push(word);
-    });
+  }, [clueColor]);
 
-    const queryString = `?red=${_.join(boardObject.red, "+")}`    +
-                        `&blue=${_.join(boardObject.blue, "+")}`  +
-                        `&tan=${_.join(boardObject.tan, "+")}`    +
-                        `&black=${_.join(boardObject.black, "+")}`;
-
-    const response =  await fetch(`${API_SERVER_URL}/clues/${color}${queryString}`);
-    if (!response.ok) {
-      throw new Error(response.statusText);
-    }
-    const newClues = await response.json();
-    setClues(newClues);
-    setClueColor(color);
-  };
+  const clues = {red: redClues, blue: blueClues}[clueColor] || [];
 
   return (
     <Block center>
-      <Button color="primary" onPress={() => getHint("red")}>Get Red Hint</Button>
-      <Button color="info" onPress={() => getHint("blue")}>Get Blue Hint</Button>
-      {(clues.length > 0) && (
-        <View marginTop={50} style={{flexDirection: 'row'}}>
+      <Button color="primary" onPress={() => setClueColor("red")}>Get Red Hint</Button>
+      <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
+      <ActivityIndicator animating={loading} size="large"/>
+      {(clues.length > 0 && !loading) && (
+        <View style={{flexDirection: 'row'}}>
           <FlatList
             data={clues}
             renderItem={({ item }) => (
