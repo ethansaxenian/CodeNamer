@@ -14,6 +14,12 @@ export default function ClueSelector({ board }) {
   const [blueClues, setBlueClues] = useState([]);
 
   useEffect(() => {
+    setRedClues([]);
+    setBlueClues([]);
+    setClueColor("");
+  }, [board]);
+
+  useEffect(() => {
     const getHint = async () => {
       setLoading(true);
 
@@ -24,8 +30,10 @@ export default function ClueSelector({ board }) {
         black: []
       }
 
-      board.forEach(({ word, color }) => {
-        boardObject[color].push(word);
+      board.forEach(({ word, color, active }) => {
+        if (active) {
+          boardObject[color].push(word);
+        }
       });
 
       const queryString = `?red=${_.join(boardObject.red, "+")}`    +

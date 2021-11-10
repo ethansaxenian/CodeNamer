@@ -1,19 +1,19 @@
 import React from 'react';
-import { StyleSheet, View, Dimensions, Text, TouchableOpacity} from 'react-native';
+import { StyleSheet, View, Dimensions, Text, TouchableOpacity, Pressable} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
 
 const { width } = Dimensions.get('screen');
 
-export default function GameBoard({ board, view }) {
+export default function GameBoard({ board, view, toggleWord }) {
   return (
     <FlatGrid
       itemDimension={width/6}
       data={board}
       style={styles.gridView}
       renderItem={({ item }) => (
-        <View style={[styles.itemContainer, { backgroundColor:view?"tan":(item.color)}]}>
-          <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.word}</Text>
-        </View>
+        <Pressable style={[styles.itemContainer, { backgroundColor:view?"tan":(item.color)}]} onPress={() => toggleWord(item.word)}>
+          <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.active ? item.word : ""}</Text>
+        </Pressable>
       )}
     />
   );
