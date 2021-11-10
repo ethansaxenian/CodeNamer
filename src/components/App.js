@@ -11,7 +11,7 @@ import DevShortcut from '../temp/DevShortcut';
 export default function App() {
   const [colors, setColors] = useState(null);
   const [words, setWords] = useState(null);
-  const [spyView, setView] = useState("");
+  const [spyView, setView] = useState(true);
 
   const readColorCodeImage = async (imgEncoding) => {
     const response = await fetch(`${API_SERVER_URL}/colors`, {
@@ -49,11 +49,12 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Block center>
-        <Text h3>CodeNamer</Text>
+      <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}> 
+        <Text h3 style={{marginRight: 15}}>CodeNamer</Text>
           <TouchableOpacity onPress={()=>{setView(!spyView)}} style={styles.spyButton}>
           <Image style={styles.spyButton} source={spyView?require("../../assets/icon.png"): require("../../assets/player.png")}/>
           </TouchableOpacity>
-
+        </View>
         {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
       </Block>
       {!(words && colors) ? (
