@@ -12,3 +12,9 @@ import renderer from 'react-test-renderer';
 it('renders correctly', () => {
   renderer.create(<App />);
 });
+
+jest.mock('react-native-image-crop-picker', () => {
+  return {
+      ImagePicker: jest.fn()
+  };
+});

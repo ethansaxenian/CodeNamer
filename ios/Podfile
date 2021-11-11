@@ -4,15 +4,21 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '14.0'
 
 target 'CodeNamerIOS' do
+  pod 'RNImageCropPicker', :path => '/Users/coreyscheinfeld/CodeNamer/react-native-image-crop-picker-cscheinfeld'
   config = use_native_modules!
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
+
   )
 
   pod 'ExpoModulesCore',
   :path => "../node_modules/expo-modules-core/ios"
+
+
+
+
 
   target 'CodeNamerIOSTests' do
     inherit! :complete
