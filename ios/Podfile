@@ -15,6 +15,8 @@ target 'CodeNamerIOS' do
   :path => "../node_modules/expo-modules-core/ios"
 
 
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
   target 'CodeNamerIOSTests' do
     inherit! :complete
     # Pods for testing
