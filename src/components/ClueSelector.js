@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, StyleSheet, View, Dimensions } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
-import { margin } from "@mui/system";
 
 const { width } = Dimensions.get('screen');
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
 import { Text, Block, Button } from 'galio-framework';
-import { Tab } from 'react-native-elements';
 import _ from "lodash";
 
 export default function GameControls({ board, setBoard, spyView, setView}) {
