@@ -14,11 +14,9 @@ export default function GameControls({ board, setBoard, spyView, setView}) {
 
   return (
     <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}> 
-        <Button onPress={()=>{setView(!spyView)}} style={styles.spyButton}>
-        <Image style={styles.spyButton} source={spyView?require("../../assets/icon.png"): require("../../assets/norm.png")}/>
-        </Button>
+        <Button onPress={()=>{setView(!spyView)}} style={styles.spyButton}>{spyView?"SpyView":"PlayerView"}</Button>
         <Button onPress={()=>{resetBoard()}} style={styles.spyButton}>Reset</Button>
-        <Button onPress={()=>{resetBoard()}} style={styles.spyButton}>Edit</Button>
+        <Button onPress={()=>{setBoard([]), setView(true)}} style={styles.spyButton}>New Game</Button>
     </View>
   );
 }
@@ -35,7 +33,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 10,
     shadowOpacity: 0.35,
-    width: 80,
+    width: 100,
     height: 40
   },
 });

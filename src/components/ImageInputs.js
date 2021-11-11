@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Block } from "galio-framework";
 import { Text, View } from "react-native";
-import PickImage from "./ImagePicker";
+import PickImage from "./PickImage";
 import { API_SERVER_URL } from '../lib/constants';
 import DevShortcut from '../temp/DevShortcut';
 import _ from "lodash";
@@ -48,6 +48,7 @@ export default function ImageInputs({ setBoard }) {
     setColors(fetchedColors);
   };
 
+  
   return (
     <View flex={1} paddingTop={50}>
       {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}

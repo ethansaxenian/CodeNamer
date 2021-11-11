@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Alert, Button, Image, ImageBackground } from 'react-native';
 import { Text, Block } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ImageInputs from './ImageInputs';
@@ -22,20 +22,24 @@ export default function App() {
     setBoard(newBoard);
   }
 
+  
+
   return (
     <View style={styles.container}>
-      <Block center >
-        <Text h3>CodeNamer</Text>
-      </Block>
+      {!spyView?
+      <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
+      <Text h3  style={styles.spyText}>CodeNamer</Text>
+      </ImageBackground>:<Text style = {styles.text}>CodeNamer</Text>}
       {(board.length == 0) ? (
-        <ImageInputs setBoard = {setBoard}/>
+        <ImageInputs setBoard = {setBoard}  style={styles.contents}/>
       ) : (
-          <View style={{justifyContent: 'space-evenly', flexDirection:'column', alignContent:'flex-start', position: 'absolute', marginTop: 50}}>
+          <View style={styles.contents}>
             <GameBoard board={board} view = {spyView} toggleWord={toggleWord}/>
             <GameControls board = {board} setBoard = {setBoard} spyView = {spyView} setView = {setView}/>
             <ClueSelector board={board}/>
           </View>
       )}
+ 
     </View>
   );
 }
@@ -43,6 +47,34 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 100,
   },
+  image: {
+    flex:1,
+    justifyContent: "center"
+  },
+  contents:{
+    justifyContent: 'space-evenly', 
+    flexDirection:'column', 
+    alignContent:'flex-start', 
+    position: 'absolute', 
+    marginTop: 150
+  },
+  text: {
+    color: "black",
+    fontSize: 42,
+    paddingTop: 75,
+    lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  spyText: {
+    flex:1,
+    color: "white",
+    fontSize: 42,
+    paddingTop: 75,
+    lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+    backgroundColor: "#000000c0"
+  }
 });

@@ -46,6 +46,7 @@ export default function PickImage({ useImage }) {
     });
   };
 
+
   return (
     <View>
       <Button onPress={() => takePhoto()} title="Take a photo with the camera."/>

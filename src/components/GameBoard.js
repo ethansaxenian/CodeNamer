@@ -27,13 +27,17 @@ export default function GameBoard({ board, view, toggleWord }) {
       itemDimension={width/6}
       data={board}
       renderItem={({ item }) => (
-        <View>{item.active?(<Pressable style={[styles.itemContainer, { backgroundColor:view?"tan":(item.color)}]} onPress={() => toggleWord(item.word)}>
-          <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.word}</Text>
-        </Pressable>):(
-         <Pressable style={styles.imageContainer} onPress={() => toggleWord(item.word)}>
-          <Image resizeMode={"cover"} style = {styles.spyImage} source={images[item.color].uri}/>
-        </Pressable>)}
-      </View>
+        <View>
+          {item.active ? (
+            <Pressable style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]} onPress={() => toggleWord(item.word)}>
+              <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.word}</Text>
+            </Pressable>
+          ) : (
+            <Pressable style={styles.imageContainer} onPress={() => toggleWord(item.word)}>
+              <Image resizeMode={"cover"} style = {styles.spyImage} source={images[item.color].uri}/>
+            </Pressable>
+          )}
+        </View>
       )}
     />
   );
