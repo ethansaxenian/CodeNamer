@@ -12,16 +12,13 @@
     "lint": "eslint src"
   },
   "dependencies": {
-    "@emotion/react": "^11.5.0",
-    "@emotion/styled": "^11.3.0",
-    "@mui/icons-material": "^5.1.0",
-    "@mui/material": "^5.1.0",
     "expo": "^43.0.2",
     "galio-framework": "^0.8.0",
     "lodash": "^4.17.21",
     "react": "17.0.2",
     "react-dom": "^17.0.2",
     "react-native": "0.66.2",
+    "react-native-collapsible": "^1.6.0",
     "react-native-elements": "^3.4.2",
     "react-native-image-crop-picker": "^0.36.4",
     "react-native-image-picker": "^4.2.0",
