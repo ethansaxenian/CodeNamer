@@ -1,7 +1,7 @@
 import { Block, Button, Text, Accordion } from "galio-framework";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
-import _ from "lodash";
+import { ActivityIndicator, View, StyleSheet } from "react-native";
+import _, { wrap } from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
 import ClueViewer from "./ClueViewer";
 
@@ -67,36 +67,34 @@ export default function ClueSelector({ board }) {
 
   }, [clueColor]);
 
-  let clues = [];
+  const getClueString = (n, clues) =>{
+    let cluesByNum=clues.filter(( clue ) => clue.num == n);
+    let cluecontents = cluesByNum.map((clue)=>{
+      return(<View style = {styles.clueContainer}>
+      <Text style={[styles.clue, { color: clueColor }]}>
+        {_.upperFirst(clue.word)}:{" "}
+      </Text>
+      <Text style={styles.cards}>
+        {_.join(clue.cards.map((card) => _.upperFirst(card)), ", ")}
+     </Text>
+    </View>);
+    });
+    
+    return cluecontents;
+  }
+
+  let clues = {red: redClues, blue: blueClues}[clueColor] || [];
   let formattedClues = [];
 
-  useEffect(() => {
-    clues = {red: redClues, blue: blueClues}[clueColor];
-    if(clues){
-      let entry = {
-        title: "",
-        contents: ""
-      }
-      formattedClues = [2, 3, 4].map(function(n){
-        entry.title = `Clues for ${n}`;
-        cluesByNum=clues.map(( clue ) => clue.num === n);
-        entry.contents = cluesByNum.map=( function(item ) {
-          const clu
-          return(<Block>
-            <Text h6 style={[styles.clue, { color: clueColor }]}>
-              {_.upperFirst(item.word)} {item.cards.length}:
-            </Text>
-            <Text h6 style={styles.cards}>
-              {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
-            </Text>
-          </Block>);
-        });
-        console.log(entry);
-        return entry;
-      })
-    }
-    console.log(formattedClues);
-  }, [redClues, blueClues]);
+  if(clues){
+    formattedClues = [
+      { title: "Clues for 2", content: <Text style = {styles.textContainer}>{getClueString(2, clues)}</Text>},
+      { title: "Clues for 3", content: <Text style = {styles.textContainer}>{getClueString(3, clues)}</Text>},
+      { title: "Clues for 4", content: <Text style = {styles.textContainer}>{getClueString(4, clues)}</Text>}, 
+    ];
+
+  }
+
 
   return (
     <Block center>
@@ -105,12 +103,42 @@ export default function ClueSelector({ board }) {
         <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
       </View>
       <ActivityIndicator animating={loading} size="large"/>
-      {(clues.length > 0 && !loading) && (
-        // <ClueViewer clues={clues} clueColor={clueColor}/>
-        <View>
-            <Accordion dataArray = {formattedClues}/>
-        </View>
-      )}
+      
+      {(clues.length > 0 && !loading)?
+        <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}><Accordion dataArray = {formattedClues}/></View>:null
+      }
     </Block>
   )
 }
+
+
+
+const styles = StyleSheet.create({
+  clueList: {
+    borderWidth: 1,
+    borderRadius: 8
+  },
+  clueContainer: {
+    flexDirection: "row", 
+    justifyContent: "space-evenly",
+    paddingRight:20,
+    paddingTop:5,
+    paddingLeft:20,
+  },
+  textContainer: {
+    flexDirection: "column", 
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  clue: {
+    fontWeight: 'bold',
+    fontSize: 13,
+    margin: "auto"
+  },
+  cards: {
+    fontSize: 12,
+    margin: "auto"
+  },
+})
