@@ -48,7 +48,7 @@ export default function ImageInputs({ setBoard }) {
     setColors(fetchedColors);
   };
 
-  
+
   return (
     <View flex={1} paddingTop={50}>
       {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}

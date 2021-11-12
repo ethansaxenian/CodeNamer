@@ -10,17 +10,17 @@ export default function GameBoard({ board, view, toggleWord }) {
     red: {
       uri: require("../../assets/red.png")
     },
-    blue: { 
+    blue: {
       uri: require("../../assets/blue.png")
-    }, 
-    tan: { 
+    },
+    tan: {
       uri: require("../../assets/tan.png")
-    }, 
-    black: { 
+    },
+    black: {
       uri: require("../../assets/black.png")
     }
   }
-  
+
 
   return (
     <FlatGrid
@@ -29,12 +29,15 @@ export default function GameBoard({ board, view, toggleWord }) {
       renderItem={({ item }) => (
         <View>
           {item.active ? (
-            <Pressable style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]} onPress={() => toggleWord(item.word)}>
+            <Pressable
+              style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]}
+              onPress={() => toggleWord(item.word)}
+            >
               <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.word}</Text>
             </Pressable>
           ) : (
             <Pressable style={styles.imageContainer} onPress={() => toggleWord(item.word)}>
-              <Image resizeMode={"cover"} style = {styles.spyImage} source={images[item.color].uri}/>
+              <Image resizeMode={"cover"} style= {styles.spyImage} source={images[item.color].uri}/>
             </Pressable>
           )}
         </View>
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: grey,
     width: width/6,
-    height:38,
+    height: 38,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -72,7 +75,7 @@ const styles = StyleSheet.create({
       flex: 1,
       borderRadius: 5,
       alignSelf: 'stretch',
-      width: undefined,
-      height: undefined,
+      width: width/6,
+      height: 38,
   },
 });

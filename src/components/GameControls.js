@@ -1,30 +1,26 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, TouchableOpacity, Image } from 'react-native';
-import { Text, Block, Button } from 'galio-framework';
-import _ from "lodash";
+import React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { Button } from 'galio-framework';
 
 export default function GameControls({ board, setBoard, spyView, setView}) {
-    const resetBoard = () => {
-        const newBoard = board.map((card) => {
-            return {...card, active: true}
-            }
-        );
-        setBoard(newBoard);
-        }
+  const resetBoard = () => {
+    const newBoard = board.map((card) =>  ({...card, active: true}));
+    setBoard(newBoard);
+  }
 
   return (
-    <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}> 
-        <Button onPress={()=>{setView(!spyView)}} style={styles.spyButton}>{spyView?"SpyView":"PlayerView"}</Button>
-        <Button onPress={()=>{resetBoard()}} style={styles.spyButton}>Reset</Button>
-        <Button onPress={()=>{setBoard([]), setView(true)}} style={styles.spyButton}>New Game</Button>
+    <View style={styles.container}>
+      <Button onPress={()=>{setView(!spyView)}} style={styles.spyButton}>{spyView ? "SpyView" : "PlayerView"}</Button>
+      <Button onPress={()=>{resetBoard()}} style={styles.spyButton}>Reset</Button>
+      <Button onPress={()=>{setBoard([]), setView(true)}} style={styles.spyButton}>New Game</Button>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 100,
+    flexDirection: "row",
+    justifyContent: "space-evenly"
   },
   spyButton: {
     backgroundColor: 'gray',

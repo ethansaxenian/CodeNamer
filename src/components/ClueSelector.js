@@ -1,10 +1,10 @@
-import { Block, Button, Text, Accordion } from "galio-framework";
+import { Block, Button, Text } from "galio-framework";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View, Dimensions } from "react-native";
+import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
-
-const { width } = Dimensions.get('screen');
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
@@ -44,7 +44,14 @@ export default function ClueSelector({ board }) {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-      const newClues = await response.json();
+      const cluesObject = await response.json();
+
+      const newClues = [];
+      _.keys(cluesObject).forEach((num) => {
+        cluesObject[num].forEach((clue) => {
+          newClues.push({...clue, num, id: `${clue.word}${num}`})
+        });
+      });
 
       if (clueColor === "red") {
         setRedClues(newClues);
@@ -63,37 +70,37 @@ export default function ClueSelector({ board }) {
 
   const clues = {red: redClues, blue: blueClues}[clueColor] || [];
 
-  const data = [
-    { title: "4 Card Hints", content: "Lorem ipsum dolor sit amet"},
-    { title: "3 Card Hints", content: "Lorem ipsum dolor sit amet" },
-    { title: "2 Card Hints", content: "Lorem ipsum dolor sit amet" }
-  ];
-
   return (
     <Block center>
-      <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}> 
-      <Button color="primary" onPress={() => setClueColor("red")}>Get Red Hint</Button>
-      <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
-      </View> 
-      {/* <Block style={{ height: 200 }}>
-      <Accordion dataArray={data} />
-      </Block> */}
+      <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}>
+        <Button color="primary" onPress={() => setClueColor("red")}>Get Red Hint</Button>
+        <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
+      </View>
       <ActivityIndicator animating={loading} size="large"/>
       {(clues.length > 0 && !loading) && (
-        <View style={{flexDirection: 'row', padding: 15}}>
-          <FlatList
-            data={clues}
-            renderItem={({ item }) => (
-              <View>
-              <Text h6 style={[styles.clue, { color: clueColor }]}>
-                {_.upperFirst(item.word)} {item.cards.length}:
-              </Text>
-              <Text h6 style={styles.cards}>
-              {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
-            </Text>
-            </View>
-            )}
-          />
+        <View>
+          {[2, 3, 4].map((n) =>
+            <Accordion key={n}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
+                <Text h4>Clues for {n}</Text>
+              </AccordionSummary>
+              <AccordionDetails>
+                <FlatList
+                  data={clues.filter(({ num }) => +num === n)}
+                  renderItem={({ item }) => (
+                    <View>
+                      <Text h6 style={[styles.clue, { color: clueColor }]}>
+                        {_.upperFirst(item.word)} {item.cards.length}:
+                      </Text>
+                      <Text h6 style={styles.cards}>
+                        {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
+                      </Text>
+                    </View>
+                  )}
+                />
+              </AccordionDetails>
+            </Accordion>
+          )}
         </View>
       )}
     </Block>
