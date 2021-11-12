@@ -69,18 +69,18 @@ export default function ClueSelector({ board }) {
 
   const getClueString = (n, clues) =>{
     let cluesByNum=clues.filter(( clue ) => clue.num == n);
-    let cluecontents = cluesByNum.map((clue)=>{
-      return(<View style = {styles.clueContainer}>
-      <Text style={[styles.clue, { color: clueColor }]}>
-        {_.upperFirst(clue.word)}:{" "}
-      </Text>
-      <Text style={styles.cards}>
-        {_.join(clue.cards.map((card) => _.upperFirst(card)), ", ")}
-     </Text>
-    </View>);
+    return cluesByNum.map((clue)=>{
+      return(
+        <View style = {styles.clueContainer} key ={clue.word}>
+          <Text style={[styles.clue, { color: clueColor }]}>
+            {_.upperFirst(clue.word)}:{" "}
+          </Text>
+          <Text style={styles.cards}>
+            {_.join(clue.cards.map((card) => _.upperFirst(card)), ", ")}
+        </Text>
+        </View>
+      );
     });
-    
-    return cluecontents;
   }
 
   let clues = {red: redClues, blue: blueClues}[clueColor] || [];
@@ -88,13 +88,11 @@ export default function ClueSelector({ board }) {
 
   if(clues){
     formattedClues = [
-      { title: "Clues for 2", content: <Text style = {styles.textContainer}>{getClueString(2, clues)}</Text>},
-      { title: "Clues for 3", content: <Text style = {styles.textContainer}>{getClueString(3, clues)}</Text>},
-      { title: "Clues for 4", content: <Text style = {styles.textContainer}>{getClueString(4, clues)}</Text>}, 
+      { title: "Clues for 2", content: <Text>{getClueString(2, clues)}</Text>},
+      { title: "Clues for 3", content: <Text>{getClueString(3, clues)}</Text>},
+      { title: "Clues for 4", content: <Text>{getClueString(4, clues)}</Text>}, 
     ];
-
   }
-
 
   return (
     <Block center>
@@ -114,23 +112,12 @@ export default function ClueSelector({ board }) {
 
 
 const styles = StyleSheet.create({
-  clueList: {
-    borderWidth: 1,
-    borderRadius: 8
-  },
   clueContainer: {
     flexDirection: "row", 
     justifyContent: "space-evenly",
     paddingRight:20,
     paddingTop:5,
     paddingLeft:20,
-  },
-  textContainer: {
-    flexDirection: "column", 
-  },
-  header: {
-    fontWeight: 'bold',
-    fontSize: 18
   },
   clue: {
     fontWeight: 'bold',
