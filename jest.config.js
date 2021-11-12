@@ -9,6 +9,7 @@ module.exports = {
     + "|react-native-image-picker"
     + "|react-native-image-crop-picker"
     + "|react-native-super-grid"
+    + "|react-native-collapsible"
     + ")/)",
   ],
   moduleNameMapper: {
