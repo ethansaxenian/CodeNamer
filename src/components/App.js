@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Alert, Button, Image, ImageBackground } from 'react-native';
-import { Text, Block } from 'galio-framework';
+import { StyleSheet, View, ImageBackground } from 'react-native';
+import { Text } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ImageInputs from './ImageInputs';
 import ClueSelector from './ClueSelector';
 import GameControls from './GameControls';
-import _ from "lodash";
 
 export default function App() {
   const [board, setBoard] = useState([]);
@@ -22,24 +21,24 @@ export default function App() {
     setBoard(newBoard);
   }
 
-  
-
   return (
     <View style={styles.container}>
-      {!spyView?
-      <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
-      <Text h3  style={styles.spyText}>CodeNamer</Text>
-      </ImageBackground>:<Text style = {styles.text}>CodeNamer</Text>}
+      {!spyView ? (
+        <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
+          <Text h3 style={styles.spyText}>CodeNamer</Text>
+        </ImageBackground>
+      ) : (
+        <Text style = {styles.text}>CodeNamer</Text>
+      )}
       {(board.length == 0) ? (
         <ImageInputs setBoard = {setBoard}  style={styles.contents}/>
       ) : (
-          <View style={styles.contents}>
-            <GameBoard board={board} view = {spyView} toggleWord={toggleWord}/>
-            <GameControls board = {board} setBoard = {setBoard} spyView = {spyView} setView = {setView}/>
-            <ClueSelector board={board}/>
-          </View>
+        <View style={styles.contents}>
+          <GameBoard board={board} view = {spyView} toggleWord={toggleWord}/>
+          <GameControls board = {board} setBoard = {setBoard} spyView = {spyView} setView = {setView}/>
+          <ClueSelector board={board}/>
+        </View>
       )}
- 
     </View>
   );
 }
@@ -53,10 +52,10 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   contents:{
-    justifyContent: 'space-evenly', 
-    flexDirection:'column', 
-    alignContent:'flex-start', 
-    position: 'absolute', 
+    justifyContent: 'space-evenly',
+    flexDirection:'column',
+    alignContent:'flex-start',
+    position: 'absolute',
     marginTop: 150
   },
   text: {

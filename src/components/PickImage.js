@@ -1,9 +1,6 @@
 import React from 'react';
-import ImagePicker from 'react-native-image-crop-picker';
-import { Button, View, Dimensions } from 'react-native';
-
-
-const { width } = Dimensions.get('screen');
+// import ImagePicker from 'react-native-image-crop-picker';
+import { Button, View } from 'react-native';
 
 export default function PickImage({ useImage }) {
   const choosePhoto = () => {
@@ -15,7 +12,7 @@ export default function PickImage({ useImage }) {
       width: 1280,
       cropping: true,
       writeTempFile: false,
-      compressImageQuality: 1, 
+      compressImageQuality: 1,
     })
       .then(image => {
         useImage(image.data);

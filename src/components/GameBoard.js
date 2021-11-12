@@ -10,17 +10,17 @@ export default function GameBoard({ board, view, toggleWord }) {
     red: {
       uri: require("../../assets/red.png")
     },
-    blue: { 
+    blue: {
       uri: require("../../assets/blue.png")
-    }, 
-    tan: { 
+    },
+    tan: {
       uri: require("../../assets/tan.png")
-    }, 
-    black: { 
+    },
+    black: {
       uri: require("../../assets/black.png")
     }
   }
-  
+
 
   return (
     <FlatGrid
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: grey,
     width: width/6,
-    height:38,
+    height: 38,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
       flex: 1,
       borderRadius: 5,
       alignSelf: 'stretch',
-      width: undefined,
-      height: undefined,
+      width: width/6,
+      height: 38,
   },
 });
