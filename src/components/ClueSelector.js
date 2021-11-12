@@ -1,4 +1,4 @@
-import { Block, Button } from "galio-framework";
+import { Block, Button, Text, Accordion } from "galio-framework";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import _ from "lodash";
@@ -67,7 +67,36 @@ export default function ClueSelector({ board }) {
 
   }, [clueColor]);
 
-  const clues = {red: redClues, blue: blueClues}[clueColor] || [];
+  let clues = [];
+  let formattedClues = [];
+
+  useEffect(() => {
+    clues = {red: redClues, blue: blueClues}[clueColor];
+    if(clues){
+      let entry = {
+        title: "",
+        contents: ""
+      }
+      formattedClues = [2, 3, 4].map(function(n){
+        entry.title = `Clues for ${n}`;
+        cluesByNum=clues.map(( clue ) => clue.num === n);
+        entry.contents = cluesByNum.map=( function(item ) {
+          const clu
+          return(<Block>
+            <Text h6 style={[styles.clue, { color: clueColor }]}>
+              {_.upperFirst(item.word)} {item.cards.length}:
+            </Text>
+            <Text h6 style={styles.cards}>
+              {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
+            </Text>
+          </Block>);
+        });
+        console.log(entry);
+        return entry;
+      })
+    }
+    console.log(formattedClues);
+  }, [redClues, blueClues]);
 
   return (
     <Block center>
@@ -77,7 +106,10 @@ export default function ClueSelector({ board }) {
       </View>
       <ActivityIndicator animating={loading} size="large"/>
       {(clues.length > 0 && !loading) && (
-        <ClueViewer clues={clues} clueColor={clueColor}/>
+        // <ClueViewer clues={clues} clueColor={clueColor}/>
+        <View>
+            <Accordion dataArray = {formattedClues}/>
+        </View>
       )}
     </Block>
   )
