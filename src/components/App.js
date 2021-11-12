@@ -28,14 +28,14 @@ export default function App() {
           <Text h3 style={styles.spyText}>CodeNamer</Text>
         </ImageBackground>
       ) : (
-        <Text style = {styles.text}>CodeNamer</Text>
+        <Text style={styles.text}>CodeNamer</Text>
       )}
       {(board.length == 0) ? (
-        <ImageInputs setBoard = {setBoard}  style={styles.contents}/>
+        <ImageInputs setBoard={setBoard} style={styles.contents}/>
       ) : (
         <View style={styles.contents}>
-          <GameBoard board={board} view = {spyView} toggleWord={toggleWord}/>
-          <GameControls board = {board} setBoard = {setBoard} spyView = {spyView} setView = {setView}/>
+          <GameBoard board={board} view={spyView} toggleWord={toggleWord}/>
+          <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
           <ClueSelector board={board}/>
         </View>
       )}
