@@ -1,10 +1,9 @@
-import { Block, Button, Text } from "galio-framework";
+import { Block, Button } from "galio-framework";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, FlatList, StyleSheet, View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ClueViewer from "./ClueViewer";
 
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
@@ -78,42 +77,8 @@ export default function ClueSelector({ board }) {
       </View>
       <ActivityIndicator animating={loading} size="large"/>
       {(clues.length > 0 && !loading) && (
-        <View>
-          {[2, 3, 4].map((n) =>
-            <Accordion key={n}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon/>}>
-                <Text h4>Clues for {n}</Text>
-              </AccordionSummary>
-              <AccordionDetails>
-                <FlatList
-                  data={clues.filter(({ num }) => +num === n)}
-                  renderItem={({ item }) => (
-                    <View>
-                      <Text h6 style={[styles.clue, { color: clueColor }]}>
-                        {_.upperFirst(item.word)} {item.cards.length}:
-                      </Text>
-                      <Text h6 style={styles.cards}>
-                        {_.join(item.cards.map((card) => _.upperFirst(card)), ", ")}
-                      </Text>
-                    </View>
-                  )}
-                />
-              </AccordionDetails>
-            </Accordion>
-          )}
-        </View>
+        <ClueViewer clues={clues} clueColor={clueColor}/>
       )}
     </Block>
   )
 }
-
-const styles = StyleSheet.create({
-  clue: {
-    fontWeight: 'bold',
-    paddingVertical: 15
-  },
-  cards: {
-    paddingLeft: 15,
-    paddingVertical: 15
-  },
-})

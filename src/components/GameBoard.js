@@ -1,4 +1,3 @@
-import { grey } from '@mui/material/colors';
 import React from 'react';
 import { StyleSheet, View, Dimensions, Text, Image, Pressable} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
@@ -65,17 +64,17 @@ const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     borderRadius: 5,
-    backgroundColor: grey,
+    backgroundColor: "grey",
     width: width/6,
     height: 38,
     justifyContent: "center",
     alignItems: "center"
   },
   spyImage: {
-      flex: 1,
-      borderRadius: 5,
-      alignSelf: 'stretch',
-      width: width/6,
-      height: 38,
+    flex: 1,
+    borderRadius: 5,
+    alignSelf: 'stretch',
+    width: width/6,
+    height: 38,
   },
 });

@@ -51,7 +51,7 @@ export default function ImageInputs({ setBoard }) {
 
   return (
     <View flex={1} paddingTop={50}>
-      {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
+      <DevShortcut setWords={setWords} setColors={setColors}/>
       <Block center>
         <Text h5>Upload Game Board:</Text>
         <PickImage useImage={readGameBoardImage}/>

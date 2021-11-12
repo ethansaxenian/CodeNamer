@@ -1,5 +1,5 @@
 import React from 'react';
-import ImagePicker from 'react-native-image-crop-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 import { Button, View } from 'react-native';
 
 export default function PickImage({ useImage }) {
