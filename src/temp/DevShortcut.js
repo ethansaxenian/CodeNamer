@@ -6,7 +6,7 @@ Since I can't use the image picker, I've created this temporary component to all
 
 */
 
-import { Button } from "galio-framework";
+import { Block, Button } from "galio-framework";
 import React from "react";
 import _ from "lodash";
 
@@ -46,6 +46,8 @@ export default function DevShortcut({ setWords, setColors }) {
   }
 
   return (
-    <Button onPress={createMockBoard}>Generate Mock Board</Button>
+    <Block center>
+      <Button onPress={createMockBoard}>Generate Mock Board</Button>
+    </Block>
   )
 }

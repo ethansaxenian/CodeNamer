@@ -5,10 +5,12 @@ import PickImage from "./PickImage";
 import { API_SERVER_URL } from '../lib/constants';
 import DevShortcut from '../temp/DevShortcut';
 import _ from "lodash";
+import InvalidImageModal from "./InvalidImageModal";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
   const [words, setWords] = useState([]);
+  const [modalText, setModalText] = useState("");
 
   useEffect(() => {
     if ((colors.length > 0) && (words.length > 0)) {
@@ -30,7 +32,12 @@ export default function ImageInputs({ setBoard }) {
     }
 
     const fetchedGame = await response.json();
-    setWords(fetchedGame);
+
+    if (fetchedGame.length !== 25) {
+      setModalText("words");
+    } else {
+      setWords(fetchedGame);
+    }
   };
 
   const readColorCodeImage = async (imgEncoding) => {
@@ -45,12 +52,20 @@ export default function ImageInputs({ setBoard }) {
     }
 
     const fetchedColors = await response.json();
-    setColors(fetchedColors);
+
+    if (fetchedColors.length !== 25) {
+      setModalText("colors");
+    } else {
+      setColors(fetchedColors);
+    }
   };
 
 
   return (
     <View flex={1} paddingTop={50}>
+      {(modalText !== "") && (
+        <InvalidImageModal modalText={modalText} setModalText={setModalText}/>
+      )}
       {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
       <Block center>
         <Text h5>Upload Game Board:</Text>

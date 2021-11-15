@@ -2,6 +2,7 @@ import { Text } from "galio-framework";
 import React, { useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import Accordion from 'react-native-collapsible/Accordion';
+import _ from "lodash";
 
 export default function ClueViewer({ clues, clueColor }) {
   const [activeSections, setActiveSections] = useState([]);
