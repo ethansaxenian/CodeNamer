@@ -67,8 +67,11 @@ export default function ClueSelector({ board }) {
 
   }, [clueColor]);
 
-  const getClueString = (n, clues) =>{
-    let cluesByNum=clues.filter(( clue ) => clue.num == n);
+  let clues = {red: redClues, blue: blueClues}[clueColor] || [];
+  let formattedClues = [];
+
+  const getClueString = (n) =>{
+    let cluesByNum=clues.filter(( clue ) => +clue.num === n);
     return cluesByNum.map((clue)=>{
       return(
         <View style = {styles.clueContainer} key ={clue.word}>
@@ -83,14 +86,13 @@ export default function ClueSelector({ board }) {
     });
   }
 
-  let clues = {red: redClues, blue: blueClues}[clueColor] || [];
-  let formattedClues = [];
+  
 
   if(clues){
     formattedClues = [
-      { title: "Clues for 2", content: <Text>{getClueString(2, clues)}</Text>},
-      { title: "Clues for 3", content: <Text>{getClueString(3, clues)}</Text>},
-      { title: "Clues for 4", content: <Text>{getClueString(4, clues)}</Text>}, 
+      { title: "Clues for 2", content: <Text>{getClueString(2)}</Text>},
+      { title: "Clues for 3", content: <Text>{getClueString(3)}</Text>},
+      { title: "Clues for 4", content: <Text>{getClueString(4)}</Text>}, 
     ];
   }
 
@@ -102,9 +104,7 @@ export default function ClueSelector({ board }) {
       </View>
       <ActivityIndicator animating={loading} size="large"/>
       
-      {(clues.length > 0 && !loading)?
-        <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}><Accordion dataArray = {formattedClues}/></View>:null
-      }
+      {(clues.length > 0 && !loading) && <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}><Accordion dataArray = {formattedClues}/></View>}
     </Block>
   )
 }
