@@ -28,10 +28,13 @@ export default function App() {
           <Text h3 style={styles.spyText}>CodeNamer</Text>
         </ImageBackground>
       ) : (
-        <Text style={styles.text}>CodeNamer</Text>
+        (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
       )}
       {(board.length == 0) ? (
-        <ImageInputs setBoard={setBoard} style={styles.contents}/>
+        <ImageBackground source={require("../../assets/front.png")} resizeMode="cover" style={styles.image}>
+          <Text style={styles.startHeader}>CodeNamer</Text>
+          <ImageInputs setBoard={setBoard} style={styles.contents}/>
+        </ImageBackground>
       ) : (
         <View style={styles.contents}>
           <GameBoard board={board} view={spyView} toggleWord={toggleWord}/>
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
   },
   image: {
     flex:1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   contents:{
     justifyContent: 'space-evenly',
@@ -58,7 +61,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     marginTop: 150
   },
-  text: {
+  startHeader:{
+    color: "white",
+    fontSize: 42,
+    paddingTop: 75,
+    lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  gameHeader: {
     color: "black",
     fontSize: 42,
     paddingTop: 75,

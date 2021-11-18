@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Block } from "galio-framework";
-import { Text, View } from "react-native";
+import { Button, Block } from "galio-framework";
+import { Text, View, StyleSheet } from "react-native";
 import PickImage from "./PickImage";
 import { API_SERVER_URL } from '../lib/constants';
-import DevShortcut from '../temp/DevShortcut';
 import _ from "lodash";
 import InvalidImageModal from "./InvalidImageModal";
+import DevShortcut from "../temp/DevShortcut";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
   const [words, setWords] = useState([]);
   const [modalText, setModalText] = useState("");
+  const [imageType, setType] = useState("");
+
 
   useEffect(() => {
     if ((colors.length > 0) && (words.length > 0)) {
@@ -62,19 +64,36 @@ export default function ImageInputs({ setBoard }) {
 
 
   return (
-    <View flex={1} paddingTop={50}>
+    <View flex={1} paddingTop={100}>
       {(modalText !== "") && (
         <InvalidImageModal modalText={modalText} setModalText={setModalText}/>
       )}
-      {/* <DevShortcut setWords={setWords} setColors={setColors}/> */}
+      {/* <DevShortcut setColors={setColors} setWords={setWords}/> */}
       <Block center>
-        <Text h5>Upload Game Board:</Text>
-        <PickImage useImage={readGameBoardImage}/>
+        <Button color="white" onPress={()=>{setType("Game")}}>
+          <Text style={styles.text}>Upload Game Board</Text>
+        </Button>
       </Block>
       <Block center>
-        <Text h5>Upload Color Card:</Text>
-        <PickImage useImage={readColorCodeImage}/>
+        <Button color="white"  onPress={()=>{setType("Color")}}>
+          <Text style={styles.text}>Upload Color Card</Text>
+        </Button>
       </Block>
+      {(imageType !== "") && (
+        <PickImage
+          useImage={(imageType === "Game") ? readGameBoardImage : readColorCodeImage}
+          visible={imageType !== ""}
+          setVisible={setType}
+        />
+      )}
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  text:{
+    color: "black",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+});

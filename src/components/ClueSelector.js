@@ -1,9 +1,8 @@
-import { Block, Button } from "galio-framework";
+import { Block, Button, Text, Accordion } from "galio-framework";
 import React, { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { ActivityIndicator, View, StyleSheet } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
-import ClueViewer from "./ClueViewer";
 
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
@@ -69,6 +68,28 @@ export default function ClueSelector({ board }) {
 
   const clues = {red: redClues, blue: blueClues}[clueColor] || [];
 
+  const getClueString = (n) => {
+    const cluesByNum = clues.filter(( clue ) => +clue.num === n);
+    return cluesByNum.map((clue)=>{
+      return(
+        <View style = {styles.clueContainer} key={clue.word}>
+          <Text style={[styles.clue, { color: clueColor }]}>
+            {_.upperFirst(clue.word)}:{" "}
+          </Text>
+          <Text style={styles.cards}>
+            {_.join(clue.cards.map((card) => _.upperFirst(card)), ", ")}
+        </Text>
+        </View>
+      );
+    });
+  }
+
+  const formattedClues = clues ? [
+    { title: "Clues for 2", content: <Text>{getClueString(2)}</Text>},
+    { title: "Clues for 3", content: <Text>{getClueString(3)}</Text>},
+    { title: "Clues for 4", content: <Text>{getClueString(4)}</Text>},
+  ] : [];
+
   return (
     <Block center>
       <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}>
@@ -77,8 +98,31 @@ export default function ClueSelector({ board }) {
       </View>
       <ActivityIndicator animating={loading} size="large"/>
       {(clues.length > 0 && !loading) && (
-        <ClueViewer clues={clues} clueColor={clueColor}/>
+        <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}>
+          <Accordion dataArray={formattedClues}/>
+        </View>
       )}
     </Block>
   )
 }
+
+
+
+const styles = StyleSheet.create({
+  clueContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    paddingRight:20,
+    paddingTop:5,
+    paddingLeft:20,
+  },
+  clue: {
+    fontWeight: 'bold',
+    fontSize: 13,
+    margin: "auto"
+  },
+  cards: {
+    fontSize: 12,
+    margin: "auto"
+  },
+})

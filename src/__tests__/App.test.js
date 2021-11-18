@@ -18,3 +18,9 @@ jest.mock('react-native-image-crop-picker', () => {
       ImagePicker: jest.fn()
   };
 });
+
+jest.mock('react-native-modal', () => {
+  return {
+      ImagePicker: jest.fn()
+  };
+});
