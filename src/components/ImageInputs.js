@@ -5,12 +5,13 @@ import PickImage from "./PickImage";
 import { API_SERVER_URL } from '../lib/constants';
 import _ from "lodash";
 import InvalidImageModal from "./InvalidImageModal";
+import DevShortcut from "../temp/DevShortcut";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
   const [words, setWords] = useState([]);
   const [modalText, setModalText] = useState("");
-  const[imageType, setType] = useState("");
+  const [imageType, setType] = useState("");
 
 
   useEffect(() => {
@@ -36,7 +37,7 @@ export default function ImageInputs({ setBoard }) {
 
     if (fetchedGame.length !== 25) {
       setModalText("words");
-    } else {  
+    } else {
       setWords(fetchedGame);
     }
   };
@@ -67,17 +68,24 @@ export default function ImageInputs({ setBoard }) {
       {(modalText !== "") && (
         <InvalidImageModal modalText={modalText} setModalText={setModalText}/>
       )}
+      {/* <DevShortcut setColors={setColors} setWords={setWords}/> */}
       <Block center>
         <Button color="white" onPress={()=>{setType("Game")}}>
-          <Text style = {styles.text}>Upload Game Board</Text>   
+          <Text style={styles.text}>Upload Game Board</Text>
         </Button>
       </Block>
       <Block center>
         <Button color="white"  onPress={()=>{setType("Color")}}>
-          <Text style = {styles.text} >Upload Color Card</Text>
+          <Text style={styles.text}>Upload Color Card</Text>
         </Button>
       </Block>
-      {(imageType!=="")&&<PickImage useImage={(imageType === "Game")?readGameBoardImage:readColorCodeImage} visible= {imageType!==""} setVisible = {setType}/>}
+      {(imageType !== "") && (
+        <PickImage
+          useImage={(imageType === "Game") ? readGameBoardImage : readColorCodeImage}
+          visible={imageType !== ""}
+          setVisible={setType}
+        />
+      )}
     </View>
   )
 }
@@ -89,4 +97,3 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
 });
-

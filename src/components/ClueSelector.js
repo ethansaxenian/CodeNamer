@@ -1,9 +1,8 @@
 import { Block, Button, Text, Accordion } from "galio-framework";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
-import _, { wrap } from "lodash";
+import _ from "lodash";
 import { API_SERVER_URL } from "../lib/constants";
-import ClueViewer from "./ClueViewer";
 
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
@@ -67,14 +66,13 @@ export default function ClueSelector({ board }) {
 
   }, [clueColor]);
 
-  let clues = {red: redClues, blue: blueClues}[clueColor] || [];
-  let formattedClues = [];
+  const clues = {red: redClues, blue: blueClues}[clueColor] || [];
 
-  const getClueString = (n) =>{
-    let cluesByNum=clues.filter(( clue ) => +clue.num === n);
+  const getClueString = (n) => {
+    const cluesByNum = clues.filter(( clue ) => +clue.num === n);
     return cluesByNum.map((clue)=>{
       return(
-        <View style = {styles.clueContainer} key ={clue.word}>
+        <View style = {styles.clueContainer} key={clue.word}>
           <Text style={[styles.clue, { color: clueColor }]}>
             {_.upperFirst(clue.word)}:{" "}
           </Text>
@@ -86,15 +84,11 @@ export default function ClueSelector({ board }) {
     });
   }
 
-  
-
-  if(clues){
-    formattedClues = [
-      { title: "Clues for 2", content: <Text>{getClueString(2)}</Text>},
-      { title: "Clues for 3", content: <Text>{getClueString(3)}</Text>},
-      { title: "Clues for 4", content: <Text>{getClueString(4)}</Text>}, 
-    ];
-  }
+  const formattedClues = clues ? [
+    { title: "Clues for 2", content: <Text>{getClueString(2)}</Text>},
+    { title: "Clues for 3", content: <Text>{getClueString(3)}</Text>},
+    { title: "Clues for 4", content: <Text>{getClueString(4)}</Text>},
+  ] : [];
 
   return (
     <Block center>
@@ -103,8 +97,11 @@ export default function ClueSelector({ board }) {
         <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
       </View>
       <ActivityIndicator animating={loading} size="large"/>
-      
-      {(clues.length > 0 && !loading) && <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}><Accordion dataArray = {formattedClues}/></View>}
+      {(clues.length > 0 && !loading) && (
+        <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}>
+          <Accordion dataArray={formattedClues}/>
+        </View>
+      )}
     </Block>
   )
 }
@@ -113,7 +110,7 @@ export default function ClueSelector({ board }) {
 
 const styles = StyleSheet.create({
   clueContainer: {
-    flexDirection: "row", 
+    flexDirection: "row",
     justifyContent: "space-evenly",
     paddingRight:20,
     paddingTop:5,

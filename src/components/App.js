@@ -27,14 +27,14 @@ export default function App() {
         <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
           <Text h3 style={styles.spyText}>CodeNamer</Text>
         </ImageBackground>
-      ) : ((board.length != 0) ? 
-        <Text style={styles.gameHeader}>CodeNamer</Text>:null
+      ) : (
+        (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
       )}
       {(board.length == 0) ? (
         <ImageBackground source={require("../../assets/front.png")} resizeMode="cover" style={styles.image}>
-        <Text style={styles.startHeader}>CodeNamer</Text>
-        <ImageInputs setBoard={setBoard} style={styles.contents}/>
-        </ImageBackground>    
+          <Text style={styles.startHeader}>CodeNamer</Text>
+          <ImageInputs setBoard={setBoard} style={styles.contents}/>
+        </ImageBackground>
       ) : (
         <View style={styles.contents}>
           <GameBoard board={board} view={spyView} toggleWord={toggleWord}/>

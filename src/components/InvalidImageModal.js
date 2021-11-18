@@ -14,10 +14,7 @@ export default function InvalidImageModal({ modalText, setModalText }) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Not enough {modalText} detected. Please use a different photo.</Text>
-          <Pressable
-            style={styles.modalButton}
-            onPress={() => setModalText("")}
-          >
+          <Pressable style={styles.modalButton} onPress={() => setModalText("")}>
             <Text style={styles.modalButtonText}>Close</Text>
           </Pressable>
         </View>

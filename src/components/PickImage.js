@@ -1,12 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 import ImagePicker from 'react-native-image-crop-picker';
 import { Icon } from "galio-framework";
 import Modal from 'react-native-modal';
-import { View, Text, Pressable, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, Pressable, StyleSheet, SafeAreaView } from 'react-native';
 
 export default function PickImage({ useImage, visible, setVisible }) {
   const close = () => setVisible("");
-
 
   const choosePhoto = async () => {
     await ImagePicker.openPicker({
@@ -53,18 +52,19 @@ export default function PickImage({ useImage, visible, setVisible }) {
       <Modal
         onBackButtonPress={close}
         onBackdropPress={close}
-        isVisible = {visible}
-        style={{justifyContent: 'flex-end', margin: 0}}>
+        isVisible={visible}
+        style={{justifyContent: 'flex-end', margin: 0}}
+        >
           <SafeAreaView style={styles.options}>
-          <Pressable style={styles.option} onPress={()=>{choosePhoto()}}>
-          <Icon name="images" family="entypo" size={30} />
-            <Text>Library </Text>
-          </Pressable>
-          <Pressable style={styles.option} onPress={()=>{takePhoto()}}>
-          <Icon name="camera" family="entypo" size={30} />
-            <Text>Camera</Text>
-          </Pressable>
-        </SafeAreaView>
+            <Pressable style={styles.option} onPress={()=>{choosePhoto()}}>
+              <Icon name="images" family="entypo" size={30} />
+              <Text>Library</Text>
+            </Pressable>
+            <Pressable style={styles.option} onPress={()=>{takePhoto()}}>
+              <Icon name="camera" family="entypo" size={30} />
+              <Text>Camera</Text>
+            </Pressable>
+          </SafeAreaView>
       </Modal>
     </>
   );
