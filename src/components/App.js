@@ -25,7 +25,7 @@ export default function App() {
     <View style={styles.container}>
       {!spyView ? (
         <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
-          <Text h3 style={styles.spyText}>CodeNamer</Text>
+          <Text h3 style={styles.spyHeader}>CodeNamer</Text>
         </ImageBackground>
       ) : (
         (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
-  spyText: {
+  spyHeader: {
     flex:1,
     color: "white",
     fontSize: 42,
