@@ -38,8 +38,6 @@ export default function ClueSelector({ board }) {
                           (boardObject.tan.length > 0   ? `&tan=${_.join(boardObject.tan, "+")}`     : "") +
                           (boardObject.black.length > 0 ? `&black=${_.join(boardObject.black, "+")}` : "");
 
-      console.log(queryString);
-
       const response =  await fetch(`${API_SERVER_URL}/clues/${clueColor}${queryString}`);
       if (!response.ok) {
         throw new Error(response.statusText);
