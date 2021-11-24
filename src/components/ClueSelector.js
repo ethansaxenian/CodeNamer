@@ -33,10 +33,12 @@ export default function ClueSelector({ board }) {
         }
       });
 
-      const queryString = `?red=${_.join(boardObject.red, "+")}`    +
-                          `&blue=${_.join(boardObject.blue, "+")}`  +
-                          `&tan=${_.join(boardObject.tan, "+")}`    +
-                          `&black=${_.join(boardObject.black, "+")}`;
+      const queryString = (boardObject.red.length > 0   ? `?red=${_.join(boardObject.red, "+")}`     : "") +
+                          (boardObject.blue.length > 0  ? `&blue=${_.join(boardObject.blue, "+")}`   : "") +
+                          (boardObject.tan.length > 0   ? `&tan=${_.join(boardObject.tan, "+")}`     : "") +
+                          (boardObject.black.length > 0 ? `&black=${_.join(boardObject.black, "+")}` : "");
+
+      console.log(queryString);
 
       const response =  await fetch(`${API_SERVER_URL}/clues/${clueColor}${queryString}`);
       if (!response.ok) {
