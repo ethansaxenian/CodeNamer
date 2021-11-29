@@ -1,10 +1,5 @@
 # CodeNamer
-A Codenames bot
-
-## TODO:
-- image processing to get words and colors from images
-- extend codenames functionality
-
+This app is intended as a tool to help Spymasters generate clues for Codenames. Users first take a picture of the 5x5 board as well as the color keycard and can then generate clues from a virtual representation of the boardstate.
 
 ## Installation and Setup Instructions
 
@@ -19,4 +14,4 @@ npm start
 ```
 
 
-The code for the python api is located at https://github.com/ethansaxenian/CodeNamer-api
+The code for the backend api is located at https://github.com/ethansaxenian/CodeNamer-api
