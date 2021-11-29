@@ -48,25 +48,23 @@ export default function PickImage({ useImage, visible, setVisible }) {
 
 
   return (
-    <>
-      <Modal
-        onBackButtonPress={close}
-        onBackdropPress={close}
-        isVisible={visible}
-        style={{justifyContent: 'flex-end', margin: 0}}
-        >
-          <SafeAreaView style={styles.options}>
-            <Pressable style={styles.option} onPress={()=>{choosePhoto()}}>
-              <Icon name="images" family="entypo" size={30} />
-              <Text>Library</Text>
-            </Pressable>
-            <Pressable style={styles.option} onPress={()=>{takePhoto()}}>
-              <Icon name="camera" family="entypo" size={30} />
-              <Text>Camera</Text>
-            </Pressable>
-          </SafeAreaView>
-      </Modal>
-    </>
+    <Modal
+      onBackButtonPress={close}
+      onBackdropPress={close}
+      isVisible={visible}
+      style={{justifyContent: 'flex-end', margin: 0}}
+    >
+      <SafeAreaView style={styles.options}>
+        <Pressable style={styles.option} onPress={()=>{choosePhoto()}}>
+          <Icon name="images" family="entypo" size={30} />
+          <Text>Library</Text>
+        </Pressable>
+        <Pressable style={styles.option} onPress={()=>{takePhoto()}}>
+          <Icon name="camera" family="entypo" size={30} />
+          <Text>Camera</Text>
+        </Pressable>
+      </SafeAreaView>
+    </Modal>
   );
 }
 
