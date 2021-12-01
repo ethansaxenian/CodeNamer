@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Block } from "galio-framework";
-import { Text, View, StyleSheet, RecyclerViewBackedScrollViewBase } from "react-native";
+import { Button, Block, Icon } from "galio-framework";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import PickImage from "./PickImage";
 import { API_SERVER_URL } from '../lib/constants';
 import _ from "lodash";
 import LoadImage from "./LoadImage";
-import DevShortcut from "../temp/DevShortcut";
-import Modal from 'react-native-modal';
+import Info from "./ImageInfo";
+
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
@@ -14,6 +14,7 @@ export default function ImageInputs({ setBoard }) {
   const [modalText, setModalText] = useState("");
   const [imageType, setType] = useState("");
   const [loading, setLoading] = useState(false);
+  const[info, showInfo] = useState(false);
 
   useEffect(() => {
     if ((colors.length > 0) && (words.length > 0)) {
@@ -29,7 +30,8 @@ export default function ImageInputs({ setBoard }) {
     const response = await fetch(`${API_SERVER_URL}/gameboard`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: imgEncoding
+      body: imgEncoding, 
+      timeout: 30000
     });
 
     if (!response.ok) {
@@ -52,7 +54,8 @@ export default function ImageInputs({ setBoard }) {
     const response = await fetch(`${API_SERVER_URL}/colors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: imgEncoding
+      body: imgEncoding, 
+      timeout: 30000
     });
 
     if (!response.ok) {
@@ -85,6 +88,12 @@ export default function ImageInputs({ setBoard }) {
         <Button color={(colors.length === 25)?"green":"white"}  onPress={()=>{setType("Color")}}>
           <Text style={styles.text}>Upload Color Card</Text>
         </Button>
+      </Block>
+      <Block center>
+       <Pressable onPress={()=>{showInfo(true)}}>
+          <Icon name="info-with-circle" color={"white"} family="entypo" size={30} />
+        </Pressable>
+        <Info info={info} showInfo={showInfo}/>
       </Block>
       {(imageType !== "") && (
         <PickImage
