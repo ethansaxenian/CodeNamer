@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Block } from "galio-framework";
-import { Text, View, StyleSheet, RecyclerViewBackedScrollViewBase } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import PickImage from "./PickImage";
-import { API_SERVER_URL } from '../lib/constants';
 import _ from "lodash";
 import LoadImage from "./LoadImage";
 import DevShortcut from "../temp/DevShortcut";
-import Modal from 'react-native-modal';
+import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
@@ -26,46 +25,64 @@ export default function ImageInputs({ setBoard }) {
   const readGameBoardImage = async (imgEncoding) => {
     setWords([]);
     setLoading(true);
-    const response = await fetch(`${API_SERVER_URL}/gameboard`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: imgEncoding
-    });
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
+    try {
+      const response = await fetchWithTimeout(`${API_SERVER_URL}/gameboard`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: imgEncoding
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const fetchedGame = await response.json();
+
+      if (fetchedGame.length !== 25) {
+        setModalText("words");
+      } else {
+        setWords(fetchedGame);
+      }
+
+    } catch (error) {
+      if (error.name === "AbortError") {
+        setModalText("words");
+      }
     }
 
-    const fetchedGame = await response.json();
-    
-    if (fetchedGame.length !== 25) {
-      setModalText("words");
-    } else {
-      setWords(fetchedGame);
-    }
     setLoading(false);
   };
 
   const readColorCodeImage = async (imgEncoding) => {
     setColors([]);
     setLoading(true);
-    const response = await fetch(`${API_SERVER_URL}/colors`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: imgEncoding
-    });
 
-    if (!response.ok) {
-      throw new Error(response.statusText);
+    try {
+      const response = await fetchWithTimeout(`${API_SERVER_URL}/colors`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: imgEncoding
+      });
+
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+
+      const fetchedColors = await response.json();
+
+      if (fetchedColors.length !== 25) {
+        setModalText("colors");
+      } else {
+        setColors(fetchedColors);
+      }
+
+    } catch (error) {
+      if (error.name === "AbortError") {
+        setModalText("colors");
+      }
     }
 
-    const fetchedColors = await response.json();
-    
-    if (fetchedColors.length !== 25) {
-      setModalText("colors");
-    } else {
-      setColors(fetchedColors);
-    }
     setLoading(false);
   };
 
@@ -102,11 +119,5 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
     textAlign: "center",
-  },
-  containerBox: {
-    flex:1,
-    opacity: .6,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-  },
+  }
 });
