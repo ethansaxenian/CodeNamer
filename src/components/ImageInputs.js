@@ -7,6 +7,7 @@ import _ from "lodash";
 import LoadImage from "./LoadImage";
 import DevShortcut from "../temp/DevShortcut";
 import Modal from 'react-native-modal';
+import { fetchWithTimeout } from "../lib/utils";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
@@ -26,7 +27,7 @@ export default function ImageInputs({ setBoard }) {
   const readGameBoardImage = async (imgEncoding) => {
     setWords([]);
     setLoading(true);
-    const response = await fetch(`${API_SERVER_URL}/gameboard`, {
+    const response = await fetchWithTimeout(`${API_SERVER_URL}/gameboard`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: imgEncoding
@@ -37,7 +38,7 @@ export default function ImageInputs({ setBoard }) {
     }
 
     const fetchedGame = await response.json();
-    
+
     if (fetchedGame.length !== 25) {
       setModalText("words");
     } else {
@@ -49,7 +50,7 @@ export default function ImageInputs({ setBoard }) {
   const readColorCodeImage = async (imgEncoding) => {
     setColors([]);
     setLoading(true);
-    const response = await fetch(`${API_SERVER_URL}/colors`, {
+    const response = await fetchWithTimeout(`${API_SERVER_URL}/colors`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: imgEncoding
@@ -60,7 +61,7 @@ export default function ImageInputs({ setBoard }) {
     }
 
     const fetchedColors = await response.json();
-    
+
     if (fetchedColors.length !== 25) {
       setModalText("colors");
     } else {
