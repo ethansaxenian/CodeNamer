@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Button, Block } from "galio-framework";
-import { Text, View, StyleSheet, RecyclerViewBackedScrollViewBase } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import PickImage from "./PickImage";
-import { API_SERVER_URL } from '../lib/constants';
 import _ from "lodash";
 import LoadImage from "./LoadImage";
 import DevShortcut from "../temp/DevShortcut";
-import Modal from 'react-native-modal';
-import { fetchWithTimeout } from "../lib/utils";
+import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
@@ -103,11 +101,5 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
     textAlign: "center",
-  },
-  containerBox: {
-    flex:1,
-    opacity: .6,
-    backgroundColor: 'black',
-    justifyContent: 'center',
-  },
+  }
 });
