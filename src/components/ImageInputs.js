@@ -44,13 +44,14 @@ export default function ImageInputs({ setBoard }) {
       } else {
         setWords(fetchedGame);
       }
-      setLoading(false);
 
     } catch (error) {
       if (error.name === "AbortError") {
-        setLoading(false);
+        setModalText("words");
       }
     }
+
+    setLoading(false);
   };
 
   const readColorCodeImage = async (imgEncoding) => {
@@ -75,13 +76,14 @@ export default function ImageInputs({ setBoard }) {
       } else {
         setColors(fetchedColors);
       }
-      setLoading(false);
 
     } catch (error) {
       if (error.name === "AbortError") {
-        setLoading(false);
+        setModalText("colors");
       }
     }
+
+    setLoading(false);
   };
 
 
