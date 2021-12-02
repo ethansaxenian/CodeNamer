@@ -94,12 +94,12 @@ export default function ImageInputs({ setBoard }) {
       )}
       <DevShortcut setColors={setColors} setWords={setWords}/>
       <Block center>
-        <Button color={(words.length === 25)?"green":"white"} onPress={()=>{setType("Game")}}>
+        <Button color={(words.length === 25) ? "green" : "white"} onPress={() => setType("Game")}>
           <Text style={styles.text}>Upload Game Board</Text>
         </Button>
       </Block>
       <Block center>
-        <Button color={(colors.length === 25)?"green":"white"}  onPress={()=>{setType("Color")}}>
+        <Button color={(colors.length === 25) ? "green" : "white"} onPress={() => setType("Color")}>
           <Text style={styles.text}>Upload Color Card</Text>
         </Button>
       </Block>
@@ -115,7 +115,7 @@ export default function ImageInputs({ setBoard }) {
 }
 
 const styles = StyleSheet.create({
-  text:{
+  text: {
     color: "black",
     fontWeight: "bold",
     textAlign: "center",

@@ -1,36 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, ImageBackground } from 'react-native';
-import { Text } from 'galio-framework';
+import { Block, Button, Text } from 'galio-framework';
 import ImageInputs from './ImageInputs';
+import BoardInput from './BoardInput';
 
 export default function HomeScreen({ setBoard }) {
+  const [addingWords, setAddingWords] = useState(false);
 
   return (
-    <ImageBackground source={require("../../assets/front.png")} resizeMode="cover" style={styles.image}>
-      <Text style={styles.startHeader}>CodeNamer</Text>
-      <ImageInputs setBoard={setBoard} style={styles.contents}/>
-    </ImageBackground>
+    <>
+      {addingWords ? (
+        <BoardInput setAddingWords={setAddingWords} setBoard={setBoard}/>
+      ) : (
+        <ImageBackground source={require("../../assets/front.png")} resizeMode="cover" style={styles.image}>
+          <Text style={styles.homeHeader}>CodeNamer</Text>
+          <ImageInputs setBoard={setBoard} style={styles.contents}/>
+          <Block center>
+            <Button color="white" onPress={() => setAddingWords(true)}>
+              <Text style={styles.text}>Manually Add Board</Text>
+            </Button>
+          </Block>
+        </ImageBackground>
+      )}
+
+    </>
   )
 }
 
 
 const styles = StyleSheet.create({
   image: {
-    flex:1,
+    flex: 1,
     justifyContent: 'center',
   },
-  contents:{
+  contents: {
     justifyContent: 'space-evenly',
-    flexDirection:'column',
-    alignContent:'flex-start',
+    flexDirection: 'column',
+    alignContent: 'flex-start',
     position: 'absolute',
     marginTop: 150
   },
-  startHeader:{
+  homeHeader: {
     color: "white",
     fontSize: 42,
     paddingTop: 75,
     lineHeight: 84,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  text: {
+    color: "black",
     fontWeight: "bold",
     textAlign: "center",
   }

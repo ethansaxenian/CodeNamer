@@ -39,13 +39,13 @@ export default function GameScreen({ board, setBoard }) {
 
 const styles = StyleSheet.create({
   image: {
-    flex:1,
+    flex: 1,
     justifyContent: 'center',
   },
   contents:{
     justifyContent: 'space-evenly',
-    flexDirection:'column',
-    alignContent:'flex-start',
+    flexDirection: 'column',
+    alignContent: 'flex-start',
     position: 'absolute',
     marginTop: 150
   },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   spyHeader: {
-    flex:1,
+    flex: 1,
     color: "white",
     fontSize: 42,
     paddingTop: 75,
