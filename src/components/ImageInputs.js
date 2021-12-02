@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Button, Block } from "galio-framework";
-import { Text, View, StyleSheet } from "react-native";
+import { Button, Block, Icon } from "galio-framework";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import PickImage from "./PickImage";
 import _ from "lodash";
 import LoadImage from "./LoadImage";
 import DevShortcut from "../temp/DevShortcut";
 import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
+import ImageInfo from "./ImageInfo";
 
 export default function ImageInputs({ setBoard }) {
   const [colors, setColors] = useState([]);
@@ -13,6 +14,7 @@ export default function ImageInputs({ setBoard }) {
   const [modalText, setModalText] = useState("");
   const [imageType, setType] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   useEffect(() => {
     if ((colors.length > 0) && (words.length > 0)) {
@@ -109,6 +111,17 @@ export default function ImageInputs({ setBoard }) {
         <Button color={(colors.length === 25) ? "green" : "white"} onPress={() => setType("Color")}>
           <Text style={styles.text}>Upload Color Card Image</Text>
         </Button>
+      </Block>
+      <Block center>
+        <Button color="white" onPress={() => setAddingWords(true)}>
+          <Text style={styles.text}>Manually Add Board</Text>
+        </Button>
+      </Block>
+      <Block center>
+        <Pressable onPress={()=>{setShowInfo(true)}}>
+          <Icon name="info-with-circle" color={"white"} family="entypo" size={30} />
+        </Pressable>
+        {(showInfo) && <ImageInfo showInfo={showInfo} setShowInfo={setShowInfo}/>}
       </Block>
       {(imageType !== "") && (
         <PickImage

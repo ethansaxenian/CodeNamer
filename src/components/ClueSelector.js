@@ -30,7 +30,7 @@ export default function ClueSelector({ board }) {
 
       board.forEach(({ word, color, active }) => {
         if (active) {
-          boardObject[color].push(word);
+          boardObject[color].push(_.replace(word, " ", "_"));
         }
       });
 
@@ -82,7 +82,7 @@ export default function ClueSelector({ board }) {
             {_.upperFirst(clue.word)}:{" "}
           </Text>
           <Text style={styles.cards}>
-            {_.join(clue.cards.map((card) => _.upperFirst(card)), ", ")}
+            {_.join(clue.cards, ", ")}
         </Text>
         </View>
       );
