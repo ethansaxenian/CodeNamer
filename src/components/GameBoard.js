@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Dimensions, Text, Image, Pressable} from 'react-native';
 import { FlatGrid } from 'react-native-super-grid';
+import WordEditor from './WordEditor';
 
 const { width } = Dimensions.get('screen');
 
-export default function GameBoard({ board, view, toggleWord }) {
+export default function GameBoard({ board, view, toggleWord, editWord }) {
+  const [wordToEdit, setWordToEdit] = useState();
+
   const images = {
     red: {
       uri: require("../../assets/red.png")
@@ -22,26 +25,30 @@ export default function GameBoard({ board, view, toggleWord }) {
 
 
   return (
-    <FlatGrid
-      itemDimension={width/6}
-      data={board}
-      renderItem={({ item }) => (
-        <View>
-          {item.active ? (
-            <Pressable
-              style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]}
-              onPress={() => toggleWord(item.word)}
-            >
-              <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.word}</Text>
-            </Pressable>
-          ) : (
-            <Pressable style={styles.imageContainer} onPress={() => toggleWord(item.word)}>
-              <Image resizeMode={"cover"} style= {styles.spyImage} source={images[item.color].uri}/>
-            </Pressable>
-          )}
-        </View>
-      )}
-    />
+    <>
+      <FlatGrid
+        itemDimension={width/6}
+        data={board}
+        renderItem={({ item }) => (
+          <View>
+            {item.active ? (
+              <Pressable
+                style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]}
+                onPress={() => toggleWord(item.id)}
+                onLongPress={() => setWordToEdit(item)}
+              >
+                <Text style={styles.itemName} adjustsFontSizeToFit numberOfLines={1}>{item.word}</Text>
+              </Pressable>
+            ) : (
+              <Pressable style={styles.imageContainer} onPress={() => toggleWord(item.id)}>
+                <Image resizeMode={"cover"} style= {styles.spyImage} source={images[item.color].uri}/>
+              </Pressable>
+            )}
+          </View>
+        )}
+      />
+      {wordToEdit && <WordEditor wordToEdit={wordToEdit} setWordToEdit={setWordToEdit} editWord={editWord}/>}
+    </>
   );
 }
 
