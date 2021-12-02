@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Button, Block, Icon } from "galio-framework";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import PickImage from "./PickImage";
+import ImageInfo from "./ImageInfo";
 import _ from "lodash";
 import LoadImage from "./LoadImage";
-import Info from "./ImageInfo";
+
 
 
 export default function ImageInputs({ setBoard }) {
@@ -106,7 +107,9 @@ export default function ImageInputs({ setBoard }) {
        <Pressable onPress={()=>{showInfo(true)}}>
           <Icon name="info-with-circle" color={"white"} family="entypo" size={30} />
         </Pressable>
-        <Info info={info} showInfo={showInfo}/>
+        {(info) && (
+        <ImageInfo info={info} showInfo={showInfo}/>
+      )}
       </Block>
       {(imageType !== "") && (
         <PickImage

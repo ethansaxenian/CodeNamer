@@ -2,13 +2,11 @@ import React from "react";
 import Modal from 'react-native-modal';
 import { Text, Pressable, StyleSheet, FlatList, View } from 'react-native';
 
-export default function Info({ info, showInfo }) {
-  const close = () => showInfo(false);
-
+export default function ImageInfo({ info, showInfo }) {
   return (
     <Modal
       animationType="none"
-      isVisible={info?true: false}
+      isVisible={info}
       flex={1}
     >
         <View style={styles.centeredView}>
@@ -30,7 +28,7 @@ export default function Info({ info, showInfo }) {
              </View>
         </View>
     </Modal>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
