@@ -1,9 +1,10 @@
 module.exports = {
   preset: "react-native",
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx', 'node'],
   transformIgnorePatterns: [
     "node_modules/(?!(react-native"
     + "|@react-native"
+    + "|@react-native-modal"
     + "|galio-framework"
     + "|react-native-vector-icons"
     + "|react-native-image-picker"
@@ -14,5 +15,5 @@ module.exports = {
   ],
   moduleNameMapper: {
     galio: "identity-obj-proxy"
-  }
+  },
 }

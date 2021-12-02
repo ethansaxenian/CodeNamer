@@ -24,3 +24,9 @@ jest.mock('react-native-modal', () => {
       ImagePicker: jest.fn()
   };
 });
+
+jest.mock('react-native-progress', () => {
+  return {
+      ImagePicker: jest.fn()
+  };
+});

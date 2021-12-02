@@ -1,6 +1,7 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View, ActivityIndicator, SafeAreaView } from "react-native";
+import { Pressable, StyleSheet, Text, View, ActivityIndicator, SafeAreaView, Dimensions } from "react-native";
 import Modal from 'react-native-modal';
+import Progress from 'react-native-progress';
 
 export default function LoadImage({ modalText, setModalText, isLoading }) {
   return (
@@ -11,7 +12,9 @@ export default function LoadImage({ modalText, setModalText, isLoading }) {
     >
       <View>
         {isLoading?(
-          <SafeAreaView><ActivityIndicator animating={isLoading} size="large"/></SafeAreaView>
+          <View style={styles.centeredView}>
+            <Progress.Bar indeterminate={true} animationType={"timing"} color={"white"} indeterminateAnimationDuration={30000} width={200} />
+          </View>
         ) : (
           <View style={styles.centeredView}>
             <View style={styles.modalView}>
