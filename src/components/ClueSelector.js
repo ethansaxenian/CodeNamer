@@ -2,7 +2,7 @@ import { Block, Button, Text, Accordion } from "galio-framework";
 import React, { useEffect, useState } from "react";
 import { ActivityIndicator, View, StyleSheet } from "react-native";
 import _ from "lodash";
-import { API_SERVER_URL } from "../lib/constants";
+import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
 
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
@@ -38,26 +38,32 @@ export default function ClueSelector({ board }) {
                           (boardObject.tan.length > 0   ? `&tan=${_.join(boardObject.tan, "+")}`     : "") +
                           (boardObject.black.length > 0 ? `&black=${_.join(boardObject.black, "+")}` : "");
 
-      const response =  await fetch(`${API_SERVER_URL}/clues/${clueColor}?${queryString}`);
-      if (!response.ok) {
-        throw new Error(response.statusText);
-      }
-      const cluesObject = await response.json();
+      try {
+        const response = await fetchWithTimeout(`${API_SERVER_URL}/clues/${clueColor}?${queryString}`);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        const cluesObject = await response.json();
 
-      const newClues = [];
-      _.keys(cluesObject).forEach((num) => {
-        cluesObject[num].forEach((clue) => {
-          newClues.push({...clue, num, id: `${clue.word}${num}`})
+        const newClues = [];
+        _.keys(cluesObject).forEach((num) => {
+          cluesObject[num].forEach((clue) => {
+            newClues.push({...clue, num, id: `${clue.word}${num}`})
+          });
         });
-      });
 
-      if (clueColor === "red") {
-        setRedClues(newClues);
-      } else if (clueColor === "blue") {
-        setBlueClues(newClues);
+        if (clueColor === "red") {
+          setRedClues(newClues);
+        } else if (clueColor === "blue") {
+          setBlueClues(newClues);
+        }
+        setLoading(false);
+
+      } catch (error) {
+        if (error.name === "AbortError") {
+          setLoading(false);
+        }
       }
-
-      setLoading(false);
     };
 
     if (((clueColor === "blue") && (blueClues.length === 0)) || ((clueColor === "red") && (redClues.length === 0))) {
