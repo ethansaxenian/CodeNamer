@@ -33,7 +33,7 @@ export default function BoardInput({ setAddingWords, setBoard }) {
 
     const newBoardWithIDs = newBoard.map((obj, id) => ({...obj, id}));
 
-    setBoard(newBoardWithIDs);
+    setBoard(_.shuffle(newBoardWithIDs));
   }
 
   return (
