@@ -1,5 +1,5 @@
 import React from "react";
-import ImagePicker from 'react-native-image-crop-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 import { Icon } from "galio-framework";
 import Modal from 'react-native-modal';
 import { Text, Pressable, StyleSheet, SafeAreaView } from 'react-native';

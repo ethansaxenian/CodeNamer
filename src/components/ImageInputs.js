@@ -37,7 +37,7 @@ export default function ImageInputs({ setBoard }) {
     }
 
     const fetchedGame = await response.json();
-    
+
     if (fetchedGame.length !== 25) {
       setModalText("words");
     } else {
@@ -60,7 +60,7 @@ export default function ImageInputs({ setBoard }) {
     }
 
     const fetchedColors = await response.json();
-    
+
     if (fetchedColors.length !== 25) {
       setModalText("colors");
     } else {
@@ -75,7 +75,7 @@ export default function ImageInputs({ setBoard }) {
       {(modalText !== "" || loading) && (
         <LoadImage modalText={modalText} setModalText={setModalText} isLoading={loading} flex={1}/>
       )}
-      {/* <DevShortcut setColors={setColors} setWords={setWords}/> */}
+      <DevShortcut setColors={setColors} setWords={setWords}/>
       <Block center>
         <Button color={(words.length === 25)?"green":"white"} onPress={()=>{setType("Game")}}>
           <Text style={styles.text}>Upload Game Board</Text>
