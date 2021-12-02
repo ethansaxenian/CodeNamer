@@ -8,9 +8,20 @@ import GameControls from './GameControls';
 export default function GameScreen({ board, setBoard }) {
   const [spyView, setView] = useState(true);
 
-  const toggleWord = (word) => {
+  const editWord = (id, word, color) => {
     const newBoard = board.map((card) => {
-      if (card.word === word) {
+      if (card.id === id) {
+        return {...card, word, color}
+      } else {
+        return card
+      }
+    });
+    setBoard(newBoard);
+  }
+
+  const toggleWord = (id) => {
+    const newBoard = board.map((card) => {
+      if (card.id === id) {
         return {...card, active: !card.active}
       } else {
         return card
@@ -29,7 +40,7 @@ export default function GameScreen({ board, setBoard }) {
         (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
       )}
       <View style={styles.contents}>
-        <GameBoard board={board} view={spyView} toggleWord={toggleWord}/>
+        <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord}/>
         <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
         <ClueSelector board={board}/>
       </View>

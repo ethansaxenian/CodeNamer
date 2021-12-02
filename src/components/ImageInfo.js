@@ -2,11 +2,11 @@ import React from "react";
 import Modal from 'react-native-modal';
 import { Text, Pressable, StyleSheet, FlatList, View } from 'react-native';
 
-export default function ImageInfo({ info, showInfo }) {
+export default function ImageInfo({ showInfo, setShowInfo }) {
   return (
     <Modal
       animationType="none"
-      isVisible={info}
+      isVisible={showInfo}
       flex={1}
     >
         <View style={styles.centeredView}>
@@ -22,8 +22,8 @@ export default function ImageInfo({ info, showInfo }) {
                     ]}
                     renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
                 />
-                <Pressable style={styles.modalButton} onPress={() => showInfo(false)}>
-                <Text style={styles.modalButtonText}>Close</Text>
+                <Pressable style={styles.modalButton} onPress={() => setShowInfo(false)}>
+                  <Text style={styles.modalButtonText}>Close</Text>
                 </Pressable>
              </View>
         </View>

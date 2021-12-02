@@ -30,7 +30,9 @@ export default function BoardInput({ setAddingWords, setBoard }) {
       }
     });
 
-    setBoard(newBoard);
+    const newBoardWithIDs = newBoard.map((obj, id) => ({...obj, id}));
+
+    setBoard(newBoardWithIDs);
   }
 
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import { Pressable, StyleSheet, Text, View, ActivityIndicator, SafeAreaView, Dimensions } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import Modal from 'react-native-modal';
-import Progress from 'react-native-progress';
+// import Progress from 'react-native-progress';
 
 export default function LoadImage({ modalText, setModalText, isLoading }) {
   return (

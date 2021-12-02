@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, ImageBackground } from 'react-native';
-import { Block, Button, Text } from 'galio-framework';
+import { StyleSheet, ImageBackground, Pressable } from 'react-native';
+import { Block, Button, Icon, Text } from 'galio-framework';
 import ImageInputs from './ImageInputs';
 import BoardInput from './BoardInput';
+import ImageInfo from './ImageInfo';
 
 export default function HomeScreen({ setBoard }) {
   const [addingWords, setAddingWords] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   return (
     <>
@@ -20,9 +22,14 @@ export default function HomeScreen({ setBoard }) {
               <Text style={styles.text}>Manually Add Board</Text>
             </Button>
           </Block>
+          <Block center>
+            <Pressable onPress={()=>{setShowInfo(true)}}>
+              <Icon name="info-with-circle" color={"white"} family="entypo" size={30} />
+            </Pressable>
+            {(showInfo) && <ImageInfo showInfo={showInfo} setShowInfo={setShowInfo}/>}
+          </Block>
         </ImageBackground>
       )}
-
     </>
   )
 }

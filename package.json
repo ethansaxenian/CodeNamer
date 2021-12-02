@@ -12,6 +12,7 @@
     "lint": "eslint src"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.2.1",
     "expo": "^43.0.3",
     "galio-framework": "^0.8.0",
     "lodash": "^4.17.21",
