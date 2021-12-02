@@ -99,7 +99,7 @@ export default function ImageInputs({ setBoard }) {
       {(modalText !== "" || loading) && (
         <LoadImage modalText={modalText} setModalText={setModalText} isLoading={loading} flex={1}/>
       )}
-      <DevShortcut setColors={setColors} setWords={setWords}/>
+      {/* <DevShortcut setColors={setColors} setWords={setWords}/> */}
       <Block center>
         <Button color={(words.length === 25) ? "green" : "white"} onPress={() => setType("Game")}>
           <Text style={styles.text}>Upload Game Board Image</Text>
