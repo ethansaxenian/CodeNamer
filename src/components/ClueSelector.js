@@ -14,6 +14,7 @@ export default function ClueSelector({ board }) {
     setRedClues([]);
     setBlueClues([]);
     setClueColor("");
+    setLoading(false);
   }, [board]);
 
   useEffect(() => {
@@ -60,9 +61,7 @@ export default function ClueSelector({ board }) {
         setLoading(false);
 
       } catch (error) {
-        if (error.name === "AbortError") {
-          setLoading(false);
-        }
+        setLoading(false);
       }
     };
 

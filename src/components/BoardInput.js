@@ -23,6 +23,7 @@ export default function BoardInput({ setAddingWords, setBoard }) {
         _.split(words, ",").forEach((word) => {
           newBoard.push({
             word: _.toLower(_.trim(word)),
+            ogWord: _.toLower(_.trim(word)),
             color,
             active: true
           })

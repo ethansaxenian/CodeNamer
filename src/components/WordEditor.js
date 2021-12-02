@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Modal from 'react-native-modal';
-import { Text, StyleSheet, View, Pressable, TextInput } from 'react-native';
+import { StyleSheet, View, Pressable, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import _ from "lodash";
+import { Text } from "galio-framework";
 
 
 export default function WordEditor({ wordToEdit, setWordToEdit, editWord }) {
@@ -15,10 +16,10 @@ export default function WordEditor({ wordToEdit, setWordToEdit, editWord }) {
   }
 
   return (
-    <Modal flex={1} isVisible={wordToEdit}>
+    <Modal flex={1} isVisible={!!wordToEdit}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>Edit Word:</Text>
+          <Text h4 style={styles.modalText}>Edit Word:</Text>
           <Text>
             Word:
             <TextInput
@@ -82,13 +83,15 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: "#2196F3"
+    backgroundColor: "#2196F3",
+    margin: 10
   },
   closeButton: {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: "red"
+    backgroundColor: "red",
+    margin: 10
   },
   modalButtonText: {
     color: "white",

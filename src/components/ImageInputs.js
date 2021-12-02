@@ -17,7 +17,7 @@ export default function ImageInputs({ setBoard }) {
   useEffect(() => {
     if ((colors.length > 0) && (words.length > 0)) {
       // the board is represented as a list of objects
-      const newBoard = _.zip(words, colors).map(([ word, color ], id) => ({ word, color, active: true, id }));
+      const newBoard = _.zip(words, colors).map(([ word, color ], id) => ({ word, ogWord: word, color, active: true, id }));
       setBoard(newBoard);
     }
   }, [colors, words]);
