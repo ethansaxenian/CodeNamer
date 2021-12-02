@@ -4,7 +4,7 @@ import { Button } from 'galio-framework';
 
 export default function GameControls({ board, setBoard, spyView, setView}) {
   const resetBoard = () => {
-    const newBoard = board.map((card) =>  ({...card, word: card.ogWord, active: true}));
+    const newBoard = board.map((card) =>  ({...card, word: card.ogWord, color: card.ogColor, active: true}));
     setBoard(newBoard);
   }
 

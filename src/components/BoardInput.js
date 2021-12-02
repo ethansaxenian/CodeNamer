@@ -25,6 +25,7 @@ export default function BoardInput({ setAddingWords, setBoard }) {
             word: _.toLower(_.trim(word)),
             ogWord: _.toLower(_.trim(word)),
             color,
+            ogColor: color,
             active: true
           })
         });
