@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from 'react-native-modal';
-import { StyleSheet, View, Pressable, TextInput } from 'react-native';
+import { StyleSheet, View, Pressable, TextInput, Block } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import _ from "lodash";
 import { Text } from "galio-framework";
@@ -20,19 +20,20 @@ export default function WordEditor({ wordToEdit, setWordToEdit, editWord }) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text h4 style={styles.modalText}>Edit Word:</Text>
-          <Text>
+          <Text h6 style={{padding:10}}>
             Word:
-            <TextInput
-              style={styles.input}
+          </Text>
+          <TextInput
+              style={styles.textInput}
               value={word}
               onChangeText={setWord}
               placeholder={wordToEdit.word}
             />
+          <Text h6 style={{paddingTop:90, paddingLeft:15}}>
+            Color:   
           </Text>
-          <Text>
-            Color:
-            <Picker
-              style={styles.input}
+          <Picker
+              style={styles.colorInput, {width: 170}}
               selectedValue={color}
               onValueChange={(itemValue) => setColor(itemValue)}
             >
@@ -41,7 +42,7 @@ export default function WordEditor({ wordToEdit, setWordToEdit, editWord }) {
               <Picker.Item label="Tan" value="tan"/>
               <Picker.Item label="Black" value="black"/>
             </Picker>
-          </Text>
+          
           <View style={styles.buttonGroup}>
             <Pressable style={styles.submitButton} onPress={() => submit()}>
               <Text style={styles.modalButtonText}>Submit</Text>
@@ -66,10 +67,15 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
+    width: 350,
     backgroundColor: "white",
     borderRadius: 20,
+    paddingRight: 40,
+    paddingLeft: 40,
     padding: 25,
-    alignItems: "center",
+    flexDirection: "row",
+    flexWrap:"wrap",
+    justifyContent:"center",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -88,6 +94,7 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     borderRadius: 20,
+    width:100,
     padding: 10,
     elevation: 2,
     backgroundColor: "red",
@@ -99,18 +106,29 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   modalText: {
+    paddingBottom:25,
+    marginRight:50,
+    marginLeft:50,
     marginBottom: 15,
     textAlign: "center",
     fontWeight: "bold",
   },
   buttonGroup: {
+    marginTop:0,
+    paddingTop: 20,
     flexDirection: "row",
     justifyContent: "space-evenly"
   },
-  input: {
-    height: 40,
-    margin: 12,
+  textInput: {
+    width: 150,
+    maxHeight:50,
     borderWidth: 1,
     padding: 10,
+    borderRadius: 5,
+  },
+  colorInput: {
+    marginTop: -20,
+    paddingTop:-80,
+    marginRight:-10,
   },
 });

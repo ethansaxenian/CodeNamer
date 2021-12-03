@@ -13,7 +13,7 @@ export default function HomeScreen({ setBoard }) {
       ) : (
         <ImageBackground source={require("../../assets/front.png")} resizeMode="cover" style={styles.image}>
           <Text style={styles.homeHeader}>CodeNamer</Text>
-          <ImageInputs setBoard={setBoard} style={styles.contents}/>
+          <ImageInputs setBoard={setBoard} setAddingWords = {setAddingWords} style={styles.contents}/>
         </ImageBackground>
       )}
     </>

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, SafeAreaView, View } from "react-native";
+import { StyleSheet, TextInput, SafeAreaView, View , Dimensions} from "react-native";
 import _ from "lodash";
 import { Block, Button, Text} from "galio-framework";
+
+const { width } = Dimensions.get('screen');
 
 export default function BoardInput({ setAddingWords, setBoard }) {
   const [redWords, setRedWords] = useState("");
@@ -65,10 +67,12 @@ export default function BoardInput({ setAddingWords, setBoard }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "75%",
+    width: "100%",
     margin: "auto",
+    
   },
   header: {
+    paddingTop: 25,
     paddingBottom: 50
   },
   input: {
@@ -78,7 +82,8 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   buttonGroup: {
-    flexDirection: "row",
+    paddingLeft: width/4,
+    flexDirection: "column",
     justifyContent: "space-evenly"
   },
   button: {
@@ -88,7 +93,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 10,
     shadowOpacity: 0.35,
-    width: 200,
+    width: width/2,
     height: 40
   },
 })
