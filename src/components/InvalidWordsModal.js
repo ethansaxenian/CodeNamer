@@ -4,7 +4,7 @@ import { Text, Pressable, StyleSheet, View } from 'react-native';
 
 export default function InvalidWordsModal({ words, setVisible }) {
   return (
-    <Modal flex={1} isVisible={words.length > 0}>
+    <Modal flex={1} isVisible={words.length > 0}  onBackdropPress={() => setVisible(false)}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Cannot generate board due to the following invalid words:</Text>

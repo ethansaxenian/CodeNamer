@@ -17,7 +17,7 @@ export default function WordEditor({ wordToEdit, setWordToEdit, editWord }) {
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <Modal flex={1} isVisible={!!wordToEdit}>
+      <Modal flex={1} isVisible={!!wordToEdit} onBackdropPress={() => setWordToEdit()}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text h4 style={styles.modalText}>Edit Word:</Text>
