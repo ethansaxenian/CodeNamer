@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   header: {
-    paddingVertical: 25
+    paddingVertical: 25,
   },
   input: {
     height: 40,
@@ -97,11 +97,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderWidth: 1,
     padding: 10,
-  },
-  buttonGroup: {
-    paddingLeft: width/4,
-    flexDirection: "column",
-    justifyContent: "space-evenly"
   },
   button: {
     borderRadius: 20,
