@@ -8,7 +8,7 @@ import DevShortcut from "../temp/DevShortcut";
 import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
 import ImageInfo from "./ImageInfo";
 
-export default function ImageInputs({ setBoard }) {
+export default function ImageInputs({ setBoard, setAddingWords }) {
   const [colors, setColors] = useState([]);
   const [words, setWords] = useState([]);
   const [modalText, setModalText] = useState("");
