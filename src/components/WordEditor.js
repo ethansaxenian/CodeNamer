@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Modal from 'react-native-modal';
-import { StyleSheet, View, Pressable, TextInput, Block } from 'react-native';
+import { StyleSheet, View, Pressable, TextInput } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import _ from "lodash";
 import { Text } from "galio-framework";
@@ -30,19 +30,19 @@ export default function WordEditor({ wordToEdit, setWordToEdit, editWord }) {
               placeholder={wordToEdit.word}
             />
           <Text h6 style={{paddingTop:90, paddingLeft:15}}>
-            Color:   
+            Color:
           </Text>
           <Picker
               style={styles.colorInput, {width: 170}}
               selectedValue={color}
               onValueChange={(itemValue) => setColor(itemValue)}
             >
-              <Picker.Item label="Red" value="red"/>
-              <Picker.Item label="Blue" value="blue"/>
-              <Picker.Item label="Tan" value="tan"/>
-              <Picker.Item label="Black" value="black"/>
+              <Picker.Item label="Red" value="red" color="red"/>
+              <Picker.Item label="Blue" value="blue" color="blue"/>
+              <Picker.Item label="Tan" value="tan" color="tan"/>
+              <Picker.Item label="Black" value="black" color="black"/>
             </Picker>
-          
+
           <View style={styles.buttonGroup}>
             <Pressable style={styles.submitButton} onPress={() => submit()}>
               <Text style={styles.modalButtonText}>Submit</Text>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   centeredView: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop:-100,
+    marginTop: -100,
     height: 275
   },
   modalView: {
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
   },
   submitButton: {
     borderRadius: 20,
+    width: 100,
     padding: 10,
     elevation: 2,
     backgroundColor: "#2196F3",
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
   },
   closeButton: {
     borderRadius: 20,
-    width:100,
+    width: 100,
     padding: 10,
     elevation: 2,
     backgroundColor: "red",
