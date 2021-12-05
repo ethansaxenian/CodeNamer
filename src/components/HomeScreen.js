@@ -13,7 +13,7 @@ export default function HomeScreen({ setBoard }) {
       ) : (
         <ImageBackground source={require("../../assets/front.png")} resizeMode="cover" style={styles.image}>
           <Text style={styles.homeHeader}>CodeNamer</Text>
-          <ImageInputs setBoard={setBoard} setAddingWords = {setAddingWords} style={styles.contents}/>
+          <ImageInputs setBoard={setBoard} setAddingWords={setAddingWords} style={styles.contents}/>
         </ImageBackground>
       )}
     </>
@@ -38,11 +38,6 @@ const styles = StyleSheet.create({
     fontSize: 42,
     paddingTop: 75,
     lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  text: {
-    color: "black",
     fontWeight: "bold",
     textAlign: "center",
   }

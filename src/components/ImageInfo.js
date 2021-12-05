@@ -8,6 +8,7 @@ export default function ImageInfo({ showInfo, setShowInfo }) {
       animationType="none"
       isVisible={showInfo}
       flex={1}
+      onBackdropPress={() => setShowInfo(false)}
     >
         <View style={styles.centeredView}>
             <View style={styles.modalView}>
