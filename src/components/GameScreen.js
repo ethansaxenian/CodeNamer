@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native';
+import { StyleSheet, ImageBackground, ScrollView } from 'react-native';
 import { Text } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ClueSelector from './ClueSelector';
