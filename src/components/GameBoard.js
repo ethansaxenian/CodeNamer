@@ -29,6 +29,7 @@ export default function GameBoard({ board, spyView, toggleWord, editWord }) {
       <FlatGrid
         itemDimension={width/6}
         data={board}
+        scrollEnabled={false}
         renderItem={({ item }) => (
           <View>
             {item.active ? (
