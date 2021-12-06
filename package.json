@@ -22,7 +22,7 @@
     "react-native-collapsible": "^1.6.0",
     "react-native-elements": "^3.4.2",
     "react-native-image-crop-picker": "^0.37.2",
-    "react-native-image-picker": "^4.3.0",
+    "react-native-image-picker": "^4.4.0",
     "react-native-modal": "^13.0.0",
     "react-native-progress": "^5.0.0",
     "react-native-safe-area-context": "^3.3.2",
@@ -35,12 +35,12 @@
     "@babel/core": "7.16.0",
     "@babel/runtime": "7.16.3",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "27.4.0",
+    "babel-jest": "27.4.2",
     "eslint": "8.4.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-native": "^3.11.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "27.4.0",
+    "jest": "27.4.3",
     "metro-react-native-babel-preset": "0.66.2",
     "react-test-renderer": "17.0.2"
   }
