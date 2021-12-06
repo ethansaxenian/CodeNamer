@@ -47,8 +47,6 @@ export default function BoardInput({ setAddingWords, setBoard }) {
     }
     const newInvalidWords = await response.json();
 
-    console.log(newInvalidWords);
-
     if (newInvalidWords.length === 0) {
       setBoard(_.shuffle(newBoardWithIDs));
     } else {
