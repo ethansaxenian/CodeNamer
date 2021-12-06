@@ -38,7 +38,7 @@ export default function GameScreen({ board, setBoard }) {
     >
       <ScrollView style={{backgroundColor: spyView ? "#000000c0" : "rgba(255, 255, 255, 0)"}} showsVerticalScrollIndicator={false}>
         <Text style={[styles.header, {color: spyView ? "white" : "black"}]}>CodeNamer</Text>
-        <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord}/>
+        <GameBoard board={board} spyView={spyView} toggleWord={toggleWord} editWord={editWord}/>
         <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
         <ClueSelector board={board}/>
       </ScrollView>

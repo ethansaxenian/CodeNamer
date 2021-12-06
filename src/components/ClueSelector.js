@@ -75,7 +75,7 @@ export default function ClueSelector({ board }) {
 
   const getClueString = (n) => {
     const cluesByNum = clues.filter(( clue ) => +clue.num === n);
-    return cluesByNum.map((clue)=>{
+    return cluesByNum.map((clue) => {
       return(
         <View style = {styles.clueContainer} key={clue.word}>
           <Text style={[styles.clue, { color: clueColor }]}>
@@ -83,7 +83,7 @@ export default function ClueSelector({ board }) {
           </Text>
           <Text style={styles.cards}>
             {_.join(clue.cards, ", ")}
-        </Text>
+          </Text>
         </View>
       );
     });
