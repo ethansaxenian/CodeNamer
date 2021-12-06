@@ -10,7 +10,7 @@ export default function GameControls({ board, setBoard, spyView, setView}) {
 
   return (
     <View style={styles.container}>
-      <Button onPress={()=>{setView(!spyView)}} style={styles.spyButton}>{spyView ? "SpyView" : "PlayerView"}</Button>
+      <Button onPress={()=>{setView(!spyView)}} style={styles.spyButton}>{spyView ? "Player View" : "Spy View"}</Button>
       <Button onPress={()=>{resetBoard()}} style={styles.spyButton}>Reset</Button>
       <Button onPress={()=>{setBoard([]), setView(true)}} style={styles.spyButton}>New Game</Button>
     </View>
