@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, ScrollView, SafeAreaView } from 'react-native';
 import { Text } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ClueSelector from './ClueSelector';
 import GameControls from './GameControls';
 
 export default function GameScreen({ board, setBoard }) {
-  const [spyView, setView] = useState(true);
+  const [spyView, setView] = useState(false);
 
   const editWord = (id, word, color) => {
     const newBoard = board.map((card) => {
@@ -31,20 +31,18 @@ export default function GameScreen({ board, setBoard }) {
   }
 
   return (
-    <>
-      {!spyView ? (
-        <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
-          <Text h3 style={styles.spyHeader}>CodeNamer</Text>
-        </ImageBackground>
-      ) : (
-        (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
-      )}
-      <View style={styles.contents}>
-        <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord}/>
-        <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
-        <ClueSelector board={board}/>
-      </View>
-    </>
+      <ImageBackground
+        source={spyView ? require("../../assets/logo.png") : require("../../assets/white-background.png")}
+        resizeMode="cover"
+        style={styles.image}
+      >
+        <ScrollView style={{backgroundColor: spyView ? "#000000c0" : "rgba(255, 255, 255, 0)"}} showsVerticalScrollIndicator={false}>
+          <Text style={[styles.header, {color: spyView ? "white" : "black"}]}>CodeNamer</Text>
+          <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord}/>
+          <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
+          <ClueSelector board={board}/>
+        </ScrollView>
+      </ImageBackground>
   )
 }
 
@@ -53,29 +51,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
   },
-  contents:{
-    justifyContent: 'space-evenly',
-    flexDirection: 'column',
-    alignContent: 'flex-start',
-    position: 'absolute',
-    marginTop: 150
-  },
-  gameHeader: {
-    color: "black",
+  header: {
     fontSize: 42,
     paddingTop: 75,
     lineHeight: 84,
     fontWeight: "bold",
     textAlign: "center",
-  },
-  spyHeader: {
-    flex: 1,
-    color: "white",
-    fontSize: 42,
-    paddingTop: 75,
-    lineHeight: 84,
-    fontWeight: "bold",
-    textAlign: "center",
-    backgroundColor: "#000000c0"
   }
 });

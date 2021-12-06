@@ -5,7 +5,7 @@ import WordEditor from './WordEditor';
 
 const { width } = Dimensions.get('screen');
 
-export default function GameBoard({ board, view, toggleWord, editWord }) {
+export default function GameBoard({ board, spyView, toggleWord, editWord }) {
   const [wordToEdit, setWordToEdit] = useState();
 
   const images = {
@@ -33,7 +33,7 @@ export default function GameBoard({ board, view, toggleWord, editWord }) {
           <View>
             {item.active ? (
               <Pressable
-                style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]}
+                style={[styles.itemContainer, { backgroundColor: spyView ? (item.color) : "tan"}]}
                 onPress={() => toggleWord(item.id)}
                 onLongPress={() => setWordToEdit(item)}
               >
@@ -41,7 +41,7 @@ export default function GameBoard({ board, view, toggleWord, editWord }) {
               </Pressable>
             ) : (
               <Pressable style={styles.imageContainer} onPress={() => toggleWord(item.id)}>
-                <Image resizeMode={"cover"} style= {styles.spyImage} source={images[item.color].uri}/>
+                <Image resizeMode={"cover"} style={styles.spyImage} source={images[item.color].uri}/>
               </Pressable>
             )}
           </View>
