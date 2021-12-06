@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, ImageBackground, ScrollView } from 'react-native';
+import { StyleSheet, ImageBackground, ScrollView, View } from 'react-native';
 import { Text } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ClueSelector from './ClueSelector';
 import GameControls from './GameControls';
+import VirtualizedView from './VirtualizedView';
 
 export default function GameScreen({ board, setBoard }) {
   const [spyView, setView] = useState(false);
@@ -36,16 +37,14 @@ export default function GameScreen({ board, setBoard }) {
       resizeMode="cover"
       style={styles.image}
     >
-      <ScrollView
-        style={{backgroundColor: spyView ? "rgba(0, 0, 0, 0.75)" : "rgba(255, 255, 255, 0)"}}
-        showsVerticalScrollIndicator={false}
-        centerContent
-      >
-        <Text style={[styles.header, {color: spyView ? "white" : "black"}]}>CodeNamer</Text>
-        <GameBoard board={board} spyView={spyView} toggleWord={toggleWord} editWord={editWord}/>
-        <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
-        <ClueSelector board={board}/>
-      </ScrollView>
+      <VirtualizedView>
+        <View style={{backgroundColor: spyView ? "rgba(0, 0, 0, 0.75)" : "rgba(255, 255, 255, 0)", flex: 1}}>
+          <Text style={[styles.header, {color: spyView ? "white" : "black"}]}>CodeNamer</Text>
+          <GameBoard board={board} spyView={spyView} toggleWord={toggleWord} editWord={editWord}/>
+          <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
+          <ClueSelector board={board}/>
+        </View>
+      </VirtualizedView>
     </ImageBackground>
   )
 }
