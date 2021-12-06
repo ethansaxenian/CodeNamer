@@ -36,7 +36,11 @@ export default function GameScreen({ board, setBoard }) {
       resizeMode="cover"
       style={styles.image}
     >
-      <ScrollView style={{backgroundColor: spyView ? "#000000c0" : "rgba(255, 255, 255, 0)"}} showsVerticalScrollIndicator={false}>
+      <ScrollView
+        style={{backgroundColor: spyView ? "rgba(0, 0, 0, 0.75)" : "rgba(255, 255, 255, 0)"}}
+        showsVerticalScrollIndicator={false}
+        centerContent
+      >
         <Text style={[styles.header, {color: spyView ? "white" : "black"}]}>CodeNamer</Text>
         <GameBoard board={board} spyView={spyView} toggleWord={toggleWord} editWord={editWord}/>
         <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
