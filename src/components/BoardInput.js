@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, TextInput, View , Dimensions, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, SafeAreaView, ScrollView} from "react-native";
+import { StyleSheet, TextInput, View , Dimensions, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, ScrollView} from "react-native";
 import _ from "lodash";
 import { Block, Button, Text} from "galio-framework";
 import InvalidWordsModal from "./InvalidWordsModal";

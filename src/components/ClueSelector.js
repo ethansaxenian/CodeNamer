@@ -4,18 +4,29 @@ import { ActivityIndicator, View, StyleSheet } from "react-native";
 import _ from "lodash";
 import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
 
+import HintInput from './HintInput';
+
 export default function ClueSelector({ board }) {
   const [clueColor, setClueColor] = useState("");
   const [loading, setLoading] = useState(false);
   const [redClues, setRedClues] = useState([]);
   const [blueClues, setBlueClues] = useState([]);
 
+  const [match, setMatches] = useState([]);
+  const [hint, setHint] = useState({});
+  const [hintInput, getHintInput] = useState(false);
+
+  const [display, toggleDisplay] = useState(true);
+
   useEffect(() => {
     setRedClues([]);
     setBlueClues([]);
     setClueColor("");
     setLoading(false);
+    setHint([]);
+    setMatches([])
   }, [board]);
+  
 
   useEffect(() => {
     const getHint = async () => {
@@ -71,7 +82,57 @@ export default function ClueSelector({ board }) {
 
   }, [clueColor]);
 
+  useEffect(() => {
+    const getMatch = async () => {
+      setLoading(true);
+
+      const hintWord = hint.word;
+      const hintNum = hint.num;
+
+      const boardObject = {
+        red: [],
+        blue: [],
+        tan: [],
+        black: []
+      }
+
+      board.forEach(({ word, color, active }) => {
+        if (active) {
+          boardObject[color].push(_.replace(word, " ", "_"));
+        }
+      });
+
+      const queryString = (boardObject.red.length > 0   ? `red=${_.join(boardObject.red, "+")}`      : "") +
+                          (boardObject.blue.length > 0  ? `&blue=${_.join(boardObject.blue, "+")}`   : "") +
+                          (boardObject.tan.length > 0   ? `&tan=${_.join(boardObject.tan, "+")}`     : "") +
+                          (boardObject.black.length > 0 ? `&black=${_.join(boardObject.black, "+")}` : "") +
+                          (hintNum ? `&num=${hintNum}`: "");
+
+      try {
+        const response = await fetchWithTimeout(`${API_SERVER_URL}/match/${hintWord}?${queryString}`);
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        const matchObject = await response.json();
+
+        if(matchObject){
+            setMatches(matchObject);
+        }
+        setLoading(false);
+
+      } catch (error) {
+        setLoading(false);
+      }
+    };
+
+    if ((hint.word) && (hint.num >= 1)) {
+      getMatch();
+    }
+
+  }, [hint]);
+
   const clues = {red: redClues, blue: blueClues}[clueColor] || [];
+  
 
   const getClueString = (n) => {
     const cluesByNum = clues.filter(( clue ) => +clue.num === n);
@@ -95,19 +156,27 @@ export default function ClueSelector({ board }) {
     { title: "Clues for 4", content: <Text>{getClueString(4)}</Text>},
   ] : [];
 
+  const formattedMatch= match ? [
+    { title: "Operative Results", content: <Text>{hint.word} for {hint.num}: {match.join(", ")}</Text>},
+  ] : [];
+
   return (
-    <Block center>
-      <View style={{ flexDirection: "row", justifyContent: 'space-evenly' }}>
-        <Button color="primary" onPress={() => setClueColor("red")}>Get Red Hint</Button>
-        <Button color="info" onPress={() => setClueColor("blue")}>Get Blue Hint</Button>
-      </View>
-      <ActivityIndicator animating={loading} size="large"/>
-      {(clues.length > 0 && !loading) && (
-        <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly' }}>
-          <Accordion dataArray={formattedClues}/>
+    <View>
+      <Block center>
+        <View style={styles.clueContainer}>
+          <Button  color="primary" onPress={() => {setClueColor("red"); toggleDisplay(true)}}>Get Red Hint</Button>
+          <Button  color="info" onPress={() => {setClueColor("blue"); toggleDisplay(true)}}>Get Blue Hint</Button>
         </View>
-      )}
-    </Block>
+        <Button  color="warning" onPress={() => { getHintInput(true); toggleDisplay(false)}}>Get Operative Intel</Button>
+        <ActivityIndicator animating={loading} size="large" style={styles.animator}/>
+        {((clues.length > 0 && display) || (match.length > 0 && !display) && !loading)&&(
+          <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly', marginTop:display?-75:-50 }}>
+            <Accordion dataArray={display?formattedClues: formattedMatch} horizontal={true}/>
+          </View>
+        )}
+      </Block>
+      {hintInput && <HintInput setHint={setHint} hintInput={hintInput} getHintInput={getHintInput}/>}
+    </View>
   )
 }
 
@@ -129,5 +198,8 @@ const styles = StyleSheet.create({
   cards: {
     fontSize: 12,
     margin: "auto"
+  },
+  animator:{
+    paddingTop: 50,
   },
 })

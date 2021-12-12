@@ -8,7 +8,7 @@ export default function InvalidWordsModal({ words, setVisible }) {
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Cannot generate board due to the following invalid words:</Text>
-          {words.map((word) => <Text style={styles.item}>{word}</Text>)}
+          {words.map((word) => <Text style={styles.item} key = {word}>{word}</Text>)}
           <Pressable style={styles.modalButton} onPress={() => setVisible(false)}>
             <Text style={styles.modalButtonText}>Close</Text>
           </Pressable>

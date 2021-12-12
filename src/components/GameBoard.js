@@ -3,7 +3,7 @@ import { StyleSheet, View, Dimensions, Text, Image, Pressable} from 'react-nativ
 import { FlatGrid } from 'react-native-super-grid';
 import WordEditor from './WordEditor';
 
-const { width } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('screen');
 
 export default function GameBoard({ board, view, toggleWord, editWord }) {
   const [wordToEdit, setWordToEdit] = useState();
@@ -23,12 +23,13 @@ export default function GameBoard({ board, view, toggleWord, editWord }) {
     }
   }
 
-
   return (
     <>
       <FlatGrid
         itemDimension={width/6}
         data={board}
+        listKey='boardkey'
+        scrollEnabled={false}
         renderItem={({ item }) => (
           <View>
             {item.active ? (
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     width: width/6,
-    height: 38,
+    height: height/22.3,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: "grey",
     width: width/6,
-    height: 38,
+    height: height/22.2,
     justifyContent: "center",
     alignItems: "center"
   },
@@ -82,6 +83,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignSelf: 'stretch',
     width: width/6,
-    height: 38,
+    height: height/22.2,
   },
 });

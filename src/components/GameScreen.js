@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, SafeAreaView } from 'react-native';
 import { Text } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ClueSelector from './ClueSelector';
@@ -7,6 +7,7 @@ import GameControls from './GameControls';
 
 export default function GameScreen({ board, setBoard }) {
   const [spyView, setView] = useState(true);
+  
 
   const editWord = (id, word, color) => {
     const newBoard = board.map((card) => {
@@ -31,7 +32,7 @@ export default function GameScreen({ board, setBoard }) {
   }
 
   return (
-    <>
+    <View style={styles.container}>
       {!spyView ? (
         <ImageBackground source={require("../../assets/logo.png")} resizeMode="cover" style={styles.image}>
           <Text h3 style={styles.spyHeader}>CodeNamer</Text>
@@ -39,16 +40,20 @@ export default function GameScreen({ board, setBoard }) {
       ) : (
         (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
       )}
-      <View style={styles.contents}>
+      <SafeAreaView style={styles.contents}>
         <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord}/>
         <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
-        <ClueSelector board={board}/>
-      </View>
-    </>
+        <ClueSelector board={board}/>     
+      </SafeAreaView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
+  container:{
+    flex: 1, 
+    marginTop: -5
+  },
   image: {
     flex: 1,
     justifyContent: 'center',
@@ -77,5 +82,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
     backgroundColor: "#000000c0"
-  }
+  }, 
 });
