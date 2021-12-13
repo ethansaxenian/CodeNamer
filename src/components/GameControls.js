@@ -1,6 +1,9 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions } from 'react-native';
 import { Button } from 'galio-framework';
+
+const { width, height } = Dimensions.get('screen');
+
 
 export default function GameControls({ board, setBoard, spyView, setView}) {
   const resetBoard = () => {
@@ -29,7 +32,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowRadius: 10,
     shadowOpacity: 0.35,
-    width: 100,
-    height: 40
+    width: width/3.9,
+    height: height/21.1
   },
 });

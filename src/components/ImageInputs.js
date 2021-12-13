@@ -4,7 +4,6 @@ import { Text, View, StyleSheet, Pressable } from "react-native";
 import PickImage from "./PickImage";
 import _ from "lodash";
 import LoadImage from "./LoadImage";
-import DevShortcut from "../temp/DevShortcut";
 import { API_SERVER_URL, fetchWithTimeout } from "../lib/utils";
 import ImageInfo from "./ImageInfo";
 
