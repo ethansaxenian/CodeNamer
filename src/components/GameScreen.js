@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, ImageBackground, SafeAreaView } from 'react-native';
+import { StyleSheet, View, ImageBackground, SafeAreaView, Dimensions } from 'react-native';
 import { Text } from 'galio-framework';
 import GameBoard from './GameBoard';
 import ClueSelector from './ClueSelector';
 import GameControls from './GameControls';
+
+const { width, height } = Dimensions.get('screen');
 
 export default function GameScreen({ board, setBoard }) {
   const [spyView, setView] = useState(true);
@@ -41,7 +43,7 @@ export default function GameScreen({ board, setBoard }) {
         (board.length != 0) && <Text style={styles.gameHeader}>CodeNamer</Text>
       )}
       <SafeAreaView style={styles.contents}>
-        <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord}/>
+        <GameBoard board={board} view={spyView} toggleWord={toggleWord} editWord={editWord} />
         <GameControls board={board} setBoard={setBoard} spyView={spyView} setView={setView}/>
         <ClueSelector board={board}/>     
       </SafeAreaView>
@@ -52,7 +54,6 @@ export default function GameScreen({ board, setBoard }) {
 const styles = StyleSheet.create({
   container:{
     flex: 1, 
-    marginTop: -5
   },
   image: {
     flex: 1,
@@ -63,12 +64,12 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignContent: 'flex-start',
     position: 'absolute',
-    marginTop: 150
+    marginTop: height/5.66,
   },
   gameHeader: {
     color: "black",
     fontSize: 42,
-    paddingTop: 75,
+    paddingTop: height/11.25,
     lineHeight: 84,
     fontWeight: "bold",
     textAlign: "center",
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     flex: 1,
     color: "white",
     fontSize: 42,
-    paddingTop: 75,
+    paddingTop: height/11.25,
     lineHeight: 84,
     fontWeight: "bold",
     textAlign: "center",

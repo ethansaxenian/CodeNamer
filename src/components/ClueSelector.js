@@ -170,12 +170,12 @@ export default function ClueSelector({ board }) {
         <Button  color="warning" onPress={() => { getHintInput(true); toggleDisplay(false)}}>Get Operative Intel</Button>
         <ActivityIndicator animating={loading} size="large" style={styles.animator}/>
         {((clues.length > 0 && display) || (match.length > 0 && !display) && !loading)&&(
-          <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly', marginTop:display?-75:-50 }}>
-            <Accordion dataArray={display?formattedClues: formattedMatch} horizontal={true}/>
+          <View style={{ width: 350, flexDirection: "row", justifyContent: 'space-evenly', marginTop:display?-75:-50, paddingBottom:50 }}>
+            <Accordion dataArray={display?formattedClues: formattedMatch}/>
           </View>
         )}
       </Block>
-      {hintInput && <HintInput setHint={setHint} hintInput={hintInput} getHintInput={getHintInput}/>}
+      {hintInput && <HintInput setHint={setHint} hintInput={hintInput} getHintInput={getHintInput} scrollEnabled={false}/>}
     </View>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, FlatList } from 'react-native';
 import HomeScreen from './HomeScreen';
 import GameScreen from './GameScreen';
 
@@ -13,7 +13,8 @@ export default function App() {
       {(board.length == 0) ? (
         <HomeScreen setBoard={setBoard}/>
       ) : (
-          <GameScreen board={board} setBoard={setBoard}/>
+        <GameScreen board={board} setBoard={setBoard}/>
+          
       )}
     </View>
   );

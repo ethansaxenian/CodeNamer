@@ -29,10 +29,11 @@ export default function GameBoard({ board, view, toggleWord, editWord }) {
         itemDimension={width/6}
         data={board}
         listKey='boardkey'
-        scrollEnabled={false}
-        renderItem={({ item }) => (
+        renderItem={({ item }) => {
+          return(
           <View>
             {item.active ? (
+              
               <Pressable
                 style={[styles.itemContainer, { backgroundColor:view ? "tan" : (item.color)}]}
                 onPress={() => toggleWord(item.id)}
@@ -46,7 +47,8 @@ export default function GameBoard({ board, view, toggleWord, editWord }) {
               </Pressable>
             )}
           </View>
-        )}
+          )
+        }}
       />
       {wordToEdit && <WordEditor wordToEdit={wordToEdit} setWordToEdit={setWordToEdit} editWord={editWord}/>}
     </>
@@ -54,6 +56,9 @@ export default function GameBoard({ board, view, toggleWord, editWord }) {
 }
 
 const styles = StyleSheet.create({
+  gridView: {
+    height: height/3.3,
+  },
   itemContainer: {
     flex: 1,
     borderRadius: 5,
