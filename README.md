@@ -4,3 +4,5 @@ This app is intended as a tool to help Spymasters generate clues for Codenames. 
 The app works by communicating with a Flask api currently deployed to Heroku (https://code-namer.herokuapp.com/) which includes the functionality for image processing and clue generation. The code for the api is located at https://github.com/ethansaxenian/CodeNamer-api.
 
 ![Project poster](docs/poster.png)
+
+The full report for this project is located [here](docs/final_report.pdf)
