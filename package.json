@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@react-native-picker/picker": "^2.2.1",
-    "expo": "^43.0.4",
+    "expo": "^44.0.4",
     "galio-framework": "^0.8.0",
     "lodash": "^4.17.21",
     "react": "17.0.2",
@@ -33,14 +33,14 @@
   },
   "devDependencies": {
     "@babel/core": "7.16.0",
-    "@babel/runtime": "7.16.3",
+    "@babel/runtime": "7.16.7",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "27.4.4",
+    "babel-jest": "27.4.6",
     "eslint": "8.6.0",
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-native": "^4.0.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "27.4.4",
+    "jest": "27.4.7",
     "metro-react-native-babel-preset": "0.66.2",
     "react-test-renderer": "17.0.2"
   }

@@ -1,6 +1,6 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
-version: 2
+# version: 2
 
 updates:
 
@@ -13,3 +13,6 @@ updates:
     commit-message:
       prefix: "npm"
       include: "scope"
+      
+    # disable dependabot updates
+    open-pull-requests-limit: 0
