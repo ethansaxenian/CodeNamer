@@ -2,14 +2,17 @@
 
 # version: 2
 
-# updates:
+updates:
 
-#   - package-ecosystem: "npm"
-#     directory: "/"
-#     schedule:
-#       interval: "weekly"
-#     # Prefix all commit messages with "npm"
-#     # include a list of updated dependencies
-#     commit-message:
-#       prefix: "npm"
-#       include: "scope"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Prefix all commit messages with "npm"
+    # include a list of updated dependencies
+    commit-message:
+      prefix: "npm"
+      include: "scope"
+      
+    # disable dependabot updates
+    open-pull-requests-limit: 0
