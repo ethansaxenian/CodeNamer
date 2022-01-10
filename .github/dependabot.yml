@@ -1,15 +1,15 @@
 # https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
-version: 2
+# version: 2
 
-updates:
+# updates:
 
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-    # Prefix all commit messages with "npm"
-    # include a list of updated dependencies
-    commit-message:
-      prefix: "npm"
-      include: "scope"
+#   - package-ecosystem: "npm"
+#     directory: "/"
+#     schedule:
+#       interval: "weekly"
+#     # Prefix all commit messages with "npm"
+#     # include a list of updated dependencies
+#     commit-message:
+#       prefix: "npm"
+#       include: "scope"
